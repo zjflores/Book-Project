@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-class Book(db.model):
+class Book(db.Model):
 	"""Book added to db"""
 
 	__tablename__ = "books"
@@ -17,7 +17,7 @@ class Book(db.model):
 							backref="books")
 
 
-class Genre(db.model):
+class Genre(db.Model):
 	"""Genres added to db"""
 
 	__tablename__ = "genres"
@@ -28,7 +28,7 @@ class Genre(db.model):
 						unique = True)
 
 
-class BookGenre(db.model):
+class BookGenre(db.Model):
 	"""Relational table of books with their genre"""
 
 	__tablename__ = "books_genres"
@@ -43,7 +43,7 @@ class BookGenre(db.model):
 						nullable = False)	
 
 
-class User(db.model):
+class User(db.Model):
 	"""Users added to the db"""
 
 	__tablename__ = "users"
@@ -55,7 +55,7 @@ class User(db.model):
 	password = db.Column(db.String(25))	
 
 
-class Meeting(db.model):
+class Meeting(db.Model):
 	"""Meetings added to the db"""
 
 	__tablename__ = "meetings"

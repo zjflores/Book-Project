@@ -1,7 +1,8 @@
 *DS_Store
 *.pyc
-env
-keys
+env/
+keys/
 secret_keys.py
 *secret*
 secret*
+__pycache__
