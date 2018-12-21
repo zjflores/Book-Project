@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/Users/ian/anaconda3/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.pylamaEnabled": false,
+    "python.linting.banditEnabled": false,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false
+}
