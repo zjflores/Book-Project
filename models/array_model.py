@@ -8,20 +8,18 @@ class Book(db.Model):
 
 	__tablename__ = "books"
 
-	book_id = db.Column(db.Integer,
+	id = db.Column(db.Integer,
 						autoincrement = True,
 						primary_key = True)
 	title = db.Column(db.String(250), 
 						nullable = False)
-	author = db.Column(db.String(100))
-	user_id = db.Column(Integer, ForeignKey('users.id'))
-	user = relationship("User", backref="books")
+	author = db.Column(db.String(100))	
 
 class Genre(db.Model):
 	"""Genres added to db"""
 
 	__tablename__ = "genres"
-	genre_id = db.Column(db.Integer,
+	id = db.Column(db.Integer,
 						autoincrement = True,
 						primary_key = True)	
 	genre = db.Column(db.String(100),
@@ -32,14 +30,14 @@ class BookGenre(db.Model):
 	"""Relational table of books with their genre"""
 
 	__tablename__ = "books_genres"
-	book_genre_id = db.Column(db.Integer,
+	id = db.Column(db.Integer,
 						autoincrement = True,
 						primary_key = True)
 	book_id = db.Column(db.Integer,
-						db.ForeignKey('books.book_id'),
+						db.ForeignKey('books.id'),
 						nullable = False)
 	genre_id = db.Column(db.Integer,
-						db.ForeignKey('genres.genre_id'),
+						db.ForeignKey('genres.id'),
 						nullable = False)	
 
 
@@ -47,19 +45,20 @@ class User(db.Model):
 	"""Users added to the db"""
 
 	__tablename__ = "users"
-	user_id = db.Column(db.Integer,
+	id = db.Column(db.Integer,
 						autoincrement = True,
 						primary_key = True)
 	name = db.Column(db.String(250))
 	email = db.Column(db.String(500))
-	password = db.Column(db.String(25))	
+	password = db.Column(db.String(25))
+	books = db.Column(postgresql.ARRAY(db.Integer,dimensions=2))	
 
 
 class Meeting(db.Model):
 	"""Meetings added to the db"""
 
 	__tablename__ = "meetings"
-	meeting_id = db.Column(db.Integer,
+	id = db.Column(db.Integer,
 						autoincrement = True,
 						primary_key = True)
 	date = db.Column(db.String(10))

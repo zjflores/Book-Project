@@ -16,8 +16,12 @@ def index():
 	"""Homepage"""
 	
 	react_dict = {}
-	react_dict["quote"] = "Life is what happens while you wait for death."
+	react_dict["quote"] = '“Never trust anyone who has not brought a book with them.” – Lemony Snicket'
 	return jsonify(react_dict)
+
+@app.route('/add-book')
+def add_book():
+	"""Add book to db"""
 
 if __name__ == "__main__":
 	# We have to set debug=True here, since it has to be True at the
