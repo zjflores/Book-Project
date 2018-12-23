@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import UniqueConstraint
 db = SQLAlchemy()
 
 class Book(db.Model):
@@ -12,6 +13,7 @@ class Book(db.Model):
 	title = db.Column(db.String(250), 
 						nullable = False)
 	author = db.Column(db.String(50))
+	UniqueConstraint(title, author)
 	
 
 class Genre(db.Model):
