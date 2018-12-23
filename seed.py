@@ -1,8 +1,7 @@
 import csv
 from sqlalchemy import func
-from models.array_model import Book, User, Genre, connect_to_db, db
+from model import Book, User, Genre, connect_to_db, db
 from server import app
-from sqlalchemy.dialects.postgresql import array
 
 def load_users():
 	print("Users")

@@ -1,7 +1,7 @@
 
 from flask import (Flask, jsonify, render_template, redirect, request, flash, session)
 from flask_cors import CORS
-from models.relational_model import *
+from model import *
 from keys.secret_keys import flask
 
 app = Flask(__name__)
