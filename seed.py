@@ -1,16 +1,17 @@
 import csv
 from sqlalchemy import func
-from model import Book, User, Genre, connect_to_db, db
+from model import Book, User, Genre, BookUser, connect_to_db, db
 from server import app
 
 def load_users():
+	"""Load users into db"""
+
 	print("Users")
 
 	# Delete row to avoid duplicates
 	User.query.delete()
 	
 	user_rows = csv.DictReader(open('data/user_data.csv'))
-
 	for user in user_rows:
 		new_user = User(name=user["name"],
 						email=user["email"],
@@ -20,7 +21,7 @@ def load_users():
 
 
 def load_books():
-	"""Load books from books_data into db"""
+	"""Load books from into db"""
 	
 	print("Books")
 
@@ -37,8 +38,10 @@ def load_books():
 
 def load_genres():
 	"""Load genres into db"""
+
 	print("Genres")
 
+	# Delete row to avoid duplicates
 	Genre.query.delete()
 
 	for row in (open('data/genres.csv')):
@@ -48,23 +51,21 @@ def load_genres():
 
 def load_user_books():
 	"""Load a user's books into db"""
-	user_books_dict = {}
+
+	print("BookUser")
+
+	# Delete row to avoid duplicates
+	BookUser.query.delete()
+
 	bookuser_rows = csv.DictReader(open('data/bookuser.csv'))
 
 	for bookuser in bookuser_rows:
-		print (bookuser)
 		user = User.query.filter(User.name == bookuser["name"]).one()
 		book = Book.query.filter(Book.title == bookuser["title"]).first()
 
-		if user_books_dict.get(user.name, False):
-			user_books_dict[user.name].append(book.id)
-		else:
-			user_books_dict[user.name] = [book.id]
-
-	for key in user_books_dict.keys():
-		# How do I update a column
-		new_books = User.insert().values(books=user_books_dict[key])
-		db.session.add(new_books)
+		new_bookuser = BookUser(user_id=user.id,
+								book_id=book.id)
+		db.session.add(new_bookuser)
 	db.session.commit()
 
 
