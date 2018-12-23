@@ -30,9 +30,11 @@ def load_books():
 
 	book_rows = csv.DictReader(open('data/book_data.csv'))
 	for book in book_rows:
-		new_book = Book(title=book["title"],
-						author=book["author"])
-		db.session.add(new_book)
+		q = Book.query.filter((Book.title.like('%{}%'.format(book["title"])) & (Book.author == book["author"])))
+		if q.first() is None:
+			new_book = Book(title=book["title"],
+							author=book["author"])
+			db.session.add(new_book)
 	db.session.commit()
 
 
@@ -81,9 +83,9 @@ if __name__ == "__main__":
 
 	# Import different types of data
 	
-	# load_users()
-	# load_books()
-	# load_genres()
+	load_users()
+	load_books()
+	load_genres()
 	load_user_books()
 
 	
