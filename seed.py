@@ -70,6 +70,29 @@ def load_user_books():
 		db.session.add(new_bookuser)
 	db.session.commit()
 
+def load_meetings():
+	"""Load meetings into db"""
+
+	print("Meetings")
+
+	#Delete row to avoid duplicates
+	Meeting.query.delete()
+
+	meeting_rows = csv.DictReader(open('data/meetings.csv'))
+
+	for meeting in meeting_rows:
+		new_meeting = Meeting(month=meeting["month"],
+							year=meeting["year"])
+		db.session.add(new_meeting)
+	db.session.commit()
+
+# def load_usermeeting():
+# 	"""Load a user's meeting attendance into db"""
+
+# 	print("UserMeeting")
+
+# 	#Delete row to avoid duplicates
+# 	UserMeeting.query.delete()
 
 	
 
