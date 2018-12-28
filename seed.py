@@ -1,6 +1,6 @@
 import csv
 from sqlalchemy import func
-from model import Book, User, Genre, BookUser, connect_to_db, db
+from model import Book, User, Genre, BookUser, Meeting, connect_to_db, db
 from server import app
 
 def load_users():
