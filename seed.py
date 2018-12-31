@@ -94,6 +94,24 @@ def load_meetings():
 # 	#Delete row to avoid duplicates
 # 	UserMeeting.query.delete()
 
+def load_bookgenre():
+	"""load bookgenres into db"""
+
+	print("BookGenre")
+
+	#Delete row to avoid duplicates
+	BookGenre.query.delete()
+
+	bookgenre_rows = csv.DictReader(open('data/bookgenres.csv'))
+
+	for bookgenre in bookgenre_rows:
+		book = Book.query.filter(Book.title == bookgenre["title"]).first()
+		genre = Genre.query.filter(Genre.genre == bookgenre["genre"])
+
+		new_bookgenre = BookGenre(book_id=book.id,
+								genre_id=genre.id)
+		
+
 	
 
 
