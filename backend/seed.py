@@ -47,6 +47,7 @@ def load_genres():
 	Genre.query.delete()
 
 	for row in (open('data/genres.csv')):
+		row = row.rstrip()
 		new_genre = Genre(genre=row)
 		db.session.add(new_genre)
 	db.session.commit()
@@ -118,7 +119,6 @@ def load_bookgenre():
 	for bookgenre in bookgenre_rows:
 		book = Book.query.filter(Book.title == bookgenre["book"]).first()
 		genre = Genre.query.filter(Genre.genre == bookgenre["genre"]).first()
-		print(bookgenre["genre"])
 
 		new_bookgenre = BookGenre(book_id=book.id,
 								genre_id=genre.id)
@@ -135,11 +135,13 @@ if __name__ == "__main__":
 
 	# Import different types of data
 	
-	# load_users()
-	# load_books()
-	# load_genres()
-	# load_user_books()
-	# load_bookgenre()
+	load_users()
+	load_books()
+	load_genres()
+	load_meetings()
+	load_user_books()
 	load_user_meetings()
+	load_bookgenre()
+	
 
 	
