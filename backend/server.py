@@ -19,14 +19,19 @@ def index():
 	react_dict["quote"] = '“Never trust anyone who has not brought a book with them.” – Lemony Snicket'
 	return jsonify(react_dict)
 
-# @app.route('/login')
-# def login():
+@app.route('/add-book', methods=['POST'])
+def add_book():
+	"""Add book to db"""
 
+	data = request.get_json()
+	print(data)
 
-# @app.route('/add-book')
-# def add_book():
-# 	"""Add book to db"""
+	new_book = Book(title=data['title'], author=data['author'])
+	db.session.add(new_book)
+	db.session.commit()
 
+	return jsonify("Book successfully added")
+	
 if __name__ == "__main__":
 	# We have to set debug=True here, since it has to be True at the
 	# point that we invoke the DebugToolbarExtension
