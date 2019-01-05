@@ -8,8 +8,8 @@ class BookList extends React.Component{
 		let liTags = [];
 
 		this.props.books.forEach(book => {
-			liTags.push(<li>{book.Title}</li>);
-			liTags.push(<li>{book.Author}</li>)
+			liTags.push(<li>{book.title}</li>);
+			liTags.push(<li>{book.author}</li>)
 		});
 
 		return(

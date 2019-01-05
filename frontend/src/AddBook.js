@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddBook extends React.Component{
 	constructor(props) {
 		super(props);
-		this.state = {Title:'', Author:''};
+		this.state = {title:'', author:''};
 
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleAuthorChange = this.handleAuthorChange.bind(this);
@@ -11,16 +11,16 @@ class AddBook extends React.Component{
 	}
 
 	handleTitleChange(event) {
-		this.setState({Title: event.target.value});
+		this.setState({title: event.target.value});
 	}
 
 	handleAuthorChange(event) {
-		this.setState({Author: event.target.value});
+		this.setState({author: event.target.value});
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-		this.props.onAddBook(this.state.Title, this.state.Author);
+		this.props.onAddBook(this.state.title, this.state.author);
 		fetch('http://localhost:5000/add-book', {
 			method: "POST",
 			mode: "cors", // no-cors, cors, *same-origin
@@ -28,7 +28,7 @@ class AddBook extends React.Component{
 				"Content-Type": "application/json",
 				// "Content-Type": "application/x-www-form-urlencoded",
 			},
-			body: JSON.stringify({title:this.state.Title, author:this.state.Author})
+			body: JSON.stringify({title:this.state.title, author:this.state.author})
 		})
 		.then(response => response.json())
 		.then(function(data){
@@ -44,11 +44,11 @@ class AddBook extends React.Component{
 				<form onSubmit={this.handleSubmit}>
 					<label>
 						Title:
-						<input type="text" value={this.state.Title} onChange={this.handleTitleChange} />
+						<input type="text" value={this.state.title} onChange={this.handleTitleChange} />
 					</label><br/>
 					<label>
 						Author:
-						<input type="text" value={this.state.Author} onChange={this.handleAuthorChange} />
+						<input type="text" value={this.state.author} onChange={this.handleAuthorChange} />
 					</label><br/>
 					<input type="submit" value="Submit" />
 				</form>

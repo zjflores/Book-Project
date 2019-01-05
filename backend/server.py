@@ -1,5 +1,6 @@
 
 from flask import (Flask, jsonify, render_template, redirect, request, flash, session)
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from model import *
 from data.keys.secret_keys import flask
@@ -22,15 +23,48 @@ def index():
 @app.route('/add-book', methods=['POST'])
 def add_book():
 	"""Add book to db"""
-
+	
 	data = request.get_json()
 	print(data)
 
-	new_book = Book(title=data['title'], author=data['author'])
-	db.session.add(new_book)
-	db.session.commit()
+	###################################	Use exists()	################################
 
-	return jsonify("Book successfully added")
+	# q = Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"]))
+	# print(q.exists())
+	
+	# if q.exists() == True:
+	# 	return jsonify("Book already exists")
+		
+	# elif q.exists() == False:
+	# 	new_book = Book(title=data['title'], author=data['author'])
+	# 	db.session.add(new_book)
+	# 	db.session.commit()
+	# 	return jsonify("Book successfully added")
+	# else:
+	# 	return jsonify("Error")
+
+	###################################	using count()	################################
+
+	q = Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"]))
+	if q.count() > 0:
+		return jsonify("Book already exists")
+		
+	else:
+		new_book = Book(title=data['title'], author=data['author'])
+		db.session.add(new_book)
+		db.session.commit()
+		return jsonify("Book successfully added")
+
+# @app.route('/delete-book', methods=["POST"])
+# def delete_book():
+# 	"""Remove Book from db"""
+# 	data = request.get_json()
+# 	print(data)
+
+# 	q = Book.query.filter(Book.id == )
+# 	db.session.delete(q)
+# 	db.session.commit()
+		
 	
 if __name__ == "__main__":
 	# We have to set debug=True here, since it has to be True at the
