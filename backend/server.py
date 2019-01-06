@@ -27,24 +27,6 @@ def add_book():
 	data = request.get_json()
 	print(data)
 
-	###################################	Use exists()	################################
-
-	# q = Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"]))
-	# print(q.exists())
-	
-	# if q.exists() == True:
-	# 	return jsonify("Book already exists")
-		
-	# elif q.exists() == False:
-	# 	new_book = Book(title=data['title'], author=data['author'])
-	# 	db.session.add(new_book)
-	# 	db.session.commit()
-	# 	return jsonify("Book successfully added")
-	# else:
-	# 	return jsonify("Error")
-
-	###################################	using count()	################################
-
 	q = Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"]))
 	if q.count() > 0:
 		return jsonify("Book already exists")
