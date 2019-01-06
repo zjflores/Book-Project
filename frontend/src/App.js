@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home';
 import AddBook from './AddBook';
 import BookList from './BookList';
+import Login from './Login';
 // import TrashButton from '.TrashButton';
 
 class App extends React.Component{
@@ -17,9 +18,8 @@ class App extends React.Component{
       ]
     };
     this.addBook = this.addBook.bind(this);
-
   }
-  
+
   addBook(title, author) {
     let newBooks = this.state.books
 
@@ -36,6 +36,7 @@ class App extends React.Component{
     return (
       <div className="App">
         <Home/>
+        <Login />
         <AddBook onAddBook={this.addBook}/>
         <BookList books={this.state.books} />
         {/* <TrashButton remove={this.state.remove} /> */}

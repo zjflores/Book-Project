@@ -2,12 +2,11 @@
 from flask import (Flask, jsonify, render_template, redirect, request, flash, session)
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from model import *
+from model import User, Book, connect_to_db, db
 from data.keys.secret_keys import flask
 
 app = Flask(__name__)
 CORS(app)
-
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = flask.secret
 
@@ -19,6 +18,24 @@ def index():
 	react_dict = {}
 	react_dict["quote"] = '“Never trust anyone who has not brought a book with them.” – Lemony Snicket'
 	return jsonify(react_dict)
+
+@app.route('/login', methods=['POST'])
+def login():
+	"""validates user's login info"""
+	data = request.get_json()
+	print(data)
+
+	q = User.query.filter(User.email == data["email"])
+
+	if q.count() > 0:
+		q = User.query.filter((User.email == data["email"]) & (User.password == data["password"]))
+		if q.count() > 0:
+			return jsonify("Successfully logged in")
+		else:
+			return jsonify("Invalid credentials")
+	else:
+		return jsonify("User does not exist")
+
 
 @app.route('/add-book', methods=['POST'])
 def add_book():
