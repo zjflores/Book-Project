@@ -16,11 +16,10 @@ class BookList extends React.Component{
 			headers: {
 				"Content-Type": "application/json",
 				// "Content-Type": "application/x-www-form-urlencoded",
-			},
-			body: JSON.stringify({books:this.state.books})
+			}
 		})
 		.then(response => response.json())
-		.then(function(data){
+		.then((data) => {
 			console.log(data);
 			this.setState({books: data})
 		})
@@ -32,7 +31,7 @@ class BookList extends React.Component{
 		let liTags = [];
 
 		this.state.books.forEach(book => {
-			liTags.push(<li>{book.title} {book.author}</li>);
+			liTags.push(<li>{book.title} - {book.author}</li>);
 		});
 
 		return(

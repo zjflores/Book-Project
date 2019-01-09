@@ -64,11 +64,13 @@ def add_book():
 def get_user_books():
 	"""Query db for a user's books"""
 
-	data = request.get_json()
-	user_id = session['user_id']
-	print(data)
+	books = []
+	q = BookUser.query.filter(BookUser.user_id == 2).all()
 
-	books = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
+	for i in q:
+		book = Book.query.get(i.book_id)
+		books.append({'title':book.title, 'author':book.author}) 
+	print(books)
 	return jsonify(books)
 
 
