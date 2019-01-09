@@ -20,7 +20,6 @@ class AddBook extends React.Component{
 
 	handleSubmit(event) {
 		event.preventDefault();
-		this.props.onAddBook(this.state.title, this.state.author);
 		fetch('http://localhost:5000/add-book', {
 			method: "POST",
 			mode: "cors", // no-cors, cors, *same-origin

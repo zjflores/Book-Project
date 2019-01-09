@@ -1,8 +1,9 @@
 
-from flask import (Flask, jsonify, render_template, redirect, request, flash, session)
+from flask import (Flask, jsonify, redirect, request, session)
+# from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from model import User, Book, connect_to_db, db
+from model import User, Book, BookUser, connect_to_db, db
 from data.keys.secret_keys import flask
 
 app = Flask(__name__)
@@ -30,6 +31,10 @@ def login():
 	if q.count() > 0:
 		q = User.query.filter((User.email == data["email"]) & (User.password == data["password"]))
 		if q.count() > 0:
+			user = q.one()
+			session['user_id'] = user.id
+			session["isLoggedIn"] = True
+			print(session)
 			return jsonify("Successfully logged in")
 		else:
 			return jsonify("Invalid credentials")
@@ -53,6 +58,19 @@ def add_book():
 		db.session.add(new_book)
 		db.session.commit()
 		return jsonify("Book successfully added")
+
+
+@app.route('/get-user-books', methods=['GET'])
+def get_user_books():
+	"""Query db for a user's books"""
+
+	data = request.get_json()
+	user_id = session['user_id']
+	print(data)
+
+	books = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
+	return jsonify(books)
+
 
 # @app.route('/delete-book', methods=["POST"])
 # def delete_book():

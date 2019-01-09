@@ -3,13 +3,36 @@ import React, { Component } from 'react';
 class BookList extends React.Component{
 	constructor(props) {
 		super(props);
+		this.state = {
+			books : []
+		};
+		this.getBooks = this.getBooks.bind(this);
 	}
+
+	getBooks() {
+		fetch('http://localhost:5000/get-user-books', {
+			method: "GET",
+			mode: "cors", // no-cors, cors, *same-origin
+			headers: {
+				"Content-Type": "application/json",
+				// "Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: JSON.stringify({books:this.state.books})
+		})
+		.then(response => response.json())
+		.then(function(data){
+			console.log(data);
+			this.setState({books: data})
+		})
+		.catch(error => console.error(error));
+	}
+	componentDidMount() {this.getBooks()}
+	
 	render() {
 		let liTags = [];
 
-		this.props.books.forEach(book => {
-			liTags.push(<li>{book.title}</li>);
-			liTags.push(<li>{book.author}</li>)
+		this.state.books.forEach(book => {
+			liTags.push(<li>{book.title} {book.author}</li>);
 		});
 
 		return(
