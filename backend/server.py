@@ -53,6 +53,7 @@ def login():
 
 
 @app.route('/add-book', methods=['POST'])
+@cross_origin()
 def add_book():
 	"""Add book to db"""
 	

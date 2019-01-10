@@ -8,8 +8,19 @@ class BookList extends React.Component{
 			books : []
 		};
 		this.getBooks = this.getBooks.bind(this);
+		this.onBookDelete = this.onBookDelete.bind(this);
 	}
 
+	onBookDelete(title,author) {
+		const newBooks = this.state.books.filter((book,index) => {
+			if (book.title !== title && book.author!== author)
+				return true	
+			else
+				return false
+			})
+		this.setState({books: newBooks})
+		}
+	
 	getBooks() {
 		fetch('http://localhost:5000/get-user-books', {
 			method: "GET",
@@ -33,7 +44,7 @@ class BookList extends React.Component{
 		let liTags = [];
 
 		this.state.books.forEach(book => {
-			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} /></li>);
+			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} onBookDelete = {this.onBookDelete} /></li>);
 		});
 
 		return(

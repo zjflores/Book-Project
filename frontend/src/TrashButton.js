@@ -22,8 +22,9 @@ class TrashButton extends React.Component{
 			body: JSON.stringify({title:this.state.title, author:this.state.author})
 		})
 		.then(response => response.json())
-		.then(function(data){
+		.then(data => {
 			console.log(data);
+			this.props.onBookDelete(this.state.title, this.state.author)
 		})
 		.catch(error => console.error(error));
 	}
