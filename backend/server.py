@@ -2,15 +2,21 @@
 from flask import (Flask, jsonify, redirect, request, session)
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from model import User, Book, BookUser, connect_to_db, db
 from data.keys.secret_keys import flask
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
+cors = CORS(app, resources={r"/*": { r"supports_credentials":True, r"origins": r"http://localhost:3000" }})
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = flask.secret
 
+@app.after_request
+def after(response):
+  """Adds headers to all responses to satisfy CORS."""
+  response.headers.add('Access-Control-Allow-Credentials', 'true')
+  return response
 
 @app.route('/')
 def index():
@@ -21,6 +27,7 @@ def index():
 	return jsonify(react_dict)
 
 @app.route('/login', methods=['POST'])
+@cross_origin()
 def login():
 	"""validates user's login info"""
 	data = request.get_json()
@@ -33,9 +40,12 @@ def login():
 		if q.count() > 0:
 			user = q.one()
 			session['user_id'] = user.id
-			session["isLoggedIn"] = True
+			print()
+			print()
 			print(session)
-			return jsonify("Successfully logged in")
+			print()
+			print()
+			return jsonify("Successfully logged in for %s" % user.id)
 		else:
 			return jsonify("Invalid credentials")
 	else:
@@ -61,28 +71,59 @@ def add_book():
 
 
 @app.route('/get-user-books', methods=['GET'])
+@cross_origin()
 def get_user_books():
 	"""Query db for a user's books"""
 
 	books = []
-	q = BookUser.query.filter(BookUser.user_id == 2).all()
-
-	for i in q:
-		book = Book.query.get(i.book_id)
-		books.append({'title':book.title, 'author':book.author}) 
-	print(books)
+	print()
+	print()
+	print(session)
+	print()
+	print()
+	if 'user_id' in session:
+		q = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
+		for i in q:
+			book = Book.query.get(i.book_id)
+			books.append({'title':book.title, 'author':book.author}) 
+		print(books)
 	return jsonify(books)
 
 
-# @app.route('/delete-book', methods=["POST"])
-# def delete_book():
-# 	"""Remove Book from db"""
-# 	data = request.get_json()
-# 	print(data)
+@app.route('/delete-book', methods=["POST"])
+def delete_book():
+	"""Remove Book from db"""
 
-# 	q = Book.query.filter(Book.id == )
-# 	db.session.delete(q)
-# 	db.session.commit()
+	data = request.get_json()
+	print()
+	print()
+	print(data)
+	print()
+	print()
+	
+	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
+	print()
+	print()
+	print(book)
+	print()
+	print()
+
+	q = BookUser.query.filter(BookUser.book_id == book.id)
+	# q2 = BookGenre.query.filter(BookGenre.book_id == book.id)
+	if q.count() > 0:
+		user_book = q.one()
+		db.session.delete(user_book)
+		print()
+		print()
+		print(user_book)
+		print()
+		print()
+	# if q2.count() > 0:
+	# 	bookgenre = q.one()
+	# 	db.session.delete(bookgenre)
+	# db.session.delete(book)
+	db.session.commit()
+	return jsonify("Book successfully deleted")
 		
 	
 if __name__ == "__main__":

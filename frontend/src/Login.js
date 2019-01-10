@@ -3,7 +3,9 @@ import React, { Component } from "react";
 class Login extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {email: "", password: ""};
+		this.state = {
+			email: "", 
+			password: ""};
 		this.handleEmailChange = this.handleEmailChange.bind(this);
 		this.handlePasswordChange = this.handlePasswordChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,6 +24,7 @@ class Login extends Component {
 		fetch('http://localhost:5000/login', {
 			method: "POST",
 			mode: "cors", // no-cors, cors, *same-origin
+			credentials: 'include',
 			headers: {
 				"Content-Type": "application/json",
 				// "Content-Type": "application/x-www-form-urlencoded",
@@ -29,8 +32,9 @@ class Login extends Component {
 			body: JSON.stringify({email:this.state.email, password:this.state.password})
 		})
 		.then(response => response.json())
-		.then(function(data){
+		.then (data => {
 			console.log(data);
+			this.props.onLogin()
 		})
 		.catch(error => console.error(error));
 	}

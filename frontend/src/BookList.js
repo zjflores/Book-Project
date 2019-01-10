@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TrashButton from './TrashButton';
 
 class BookList extends React.Component{
 	constructor(props) {
@@ -13,6 +14,7 @@ class BookList extends React.Component{
 		fetch('http://localhost:5000/get-user-books', {
 			method: "GET",
 			mode: "cors", // no-cors, cors, *same-origin
+			credentials: 'include',
 			headers: {
 				"Content-Type": "application/json",
 				// "Content-Type": "application/x-www-form-urlencoded",
@@ -31,7 +33,7 @@ class BookList extends React.Component{
 		let liTags = [];
 
 		this.state.books.forEach(book => {
-			liTags.push(<li>{book.title} - {book.author}</li>);
+			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} /></li>);
 		});
 
 		return(

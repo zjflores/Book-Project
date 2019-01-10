@@ -14,6 +14,9 @@ class Book(db.Model):
 						nullable = False)
 	author = db.Column(db.String(50))
 	UniqueConstraint(title, author)
+
+	def __repr__(self):
+		return "<Book id={} title={} author={}>".format(self.id, self.title, self.author)
 	
 
 class Genre(db.Model):
@@ -25,6 +28,10 @@ class Genre(db.Model):
 						primary_key = True)	
 	genre = db.Column(db.String(25),
 						unique = True)
+
+	def __repr__(self):
+		return "<Genre id={} genre={}>".format(self.id, self.genre)
+	
 
 
 class BookGenre(db.Model):
@@ -41,6 +48,11 @@ class BookGenre(db.Model):
 						db.ForeignKey('genres.id'),
 						nullable = False)	
 	
+	def __repr__(self):
+		return "<BookGenre id={} Book id={} Genre id={}>".format(
+            self.id, self.book_id, self.genre_id)
+	
+	
 
 class User(db.Model):
 	"""Users added to the db"""
@@ -52,6 +64,11 @@ class User(db.Model):
 	name = db.Column(db.String(25))
 	email = db.Column(db.String(50))
 	password = db.Column(db.String(25))	
+
+	def __repr__(self):
+		return "<User id={} name={} email={} password{}>".format(
+            self.id, self.name, self.email, self.password)
+	
 
 
 class BookUser(db.Model):
@@ -72,6 +89,11 @@ class BookUser(db.Model):
 	end_month = db.Column(db.String(9))
 	end_year = db.Column(db.Integer)
 
+	def __repr__(self):
+		return "<BookUser id={} User id={} Book id={}>".format(
+            self.id, self.user_id, self.book_id)
+	
+
 
 class Meeting(db.Model):
 	"""Meetings added to the db"""
@@ -82,6 +104,11 @@ class Meeting(db.Model):
 					primary_key = True)
 	month = db.Column(db.String(9))
 	year = db.Column(db.Integer)
+
+	def __repr__(self):
+		return "<Meeting id={} month={} year={}>".format(
+            self.id, self.month, self.year)
+	
 
 
 class UserMeeting(db.Model):
@@ -97,6 +124,11 @@ class UserMeeting(db.Model):
 	meeting_id = db.Column(db.Integer,
 							db.ForeignKey('meetings.id'),
 							nullable = False)
+	
+	def __repr__(self):
+		return "<UserMeeting id={} user_id={} meeting_id={}>".format(
+            self.id, self.user_id, self.meeting_id)
+	
 
 
 class MeetingBook(db.Model):
@@ -112,6 +144,11 @@ class MeetingBook(db.Model):
 	book_id = db.Column(db.Integer,
 						db.ForeignKey('books.id'),
 						nullable = False)
+	
+	def __repr__(self):
+		return "<MeetingBook id={} meeting_id={} book_id{}>".format(
+            self.id, self.meeting_id, self.book_id)
+	
 
 ##############################################################################
 # Helper functions
