@@ -4,16 +4,20 @@ class UpdateButton extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
+			updateClicked: false,
 			title : this.props.title,	
-			author: this.props.author	
+			author: this.props.author,
+			new_title: '',	
+			new_author: ''
 		};
 		this.handleUpdateBook = this.handleUpdateBook.bind(this);
+		this.handleSaveUpdate = this.handleSaveUpdate.bind(this);
 	}
 
 	handleUpdateBook(event) {
 		event.preventDefault();
 		// change title and author fields in render to text form input
-
+		this.setState({updateClicked: true})
 	}
 
 	handleSaveUpdate(event) {
@@ -36,10 +40,15 @@ class UpdateButton extends React.Component{
 	}
 	
 	render() {
-		
-		return <button onClick={this.handleUpdateBook}>
-  		Update
-		</button>};
+		if (this.state.updateClicked) {
+			return <button onClick = {this.handleSaveUpdate}>
+			Save
+			</button>
+		} else {
+			return <button onClick={this.handleUpdateBook}>
+			Update
+			</button>}
+		}
 }
 	
 

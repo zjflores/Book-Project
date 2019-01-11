@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TrashButton from './TrashButton';
-// import UpdateButton from './UpdateButton';
+import UpdateButton from './UpdateButton';
 
 class BookList extends React.Component{
 	constructor(props) {
@@ -54,7 +54,7 @@ class BookList extends React.Component{
 		let liTags = [];
 
 		this.state.books.forEach(book => {
-			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} onBookDelete = {this.onBookDelete} /></li>);
+			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} onBookDelete = {this.onBookDelete} /><UpdateButton/></li>);
 
 			// Add back into liTag once complete
 			// <UpdateButton title = {book.title} author = {book.author} onBookUpdate = {this.onBookDelete} />
