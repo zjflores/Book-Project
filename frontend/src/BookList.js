@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TrashButton from './TrashButton';
+// import UpdateButton from './UpdateButton';
 
 class BookList extends React.Component{
 	constructor(props) {
@@ -20,6 +21,15 @@ class BookList extends React.Component{
 			})
 		this.setState({books: newBooks})
 		}
+	// onBookUpdate(title,author) {
+	// 	const updatedBooks = this.state.books.filter((book,index) => {
+	// 		if (book.title !== title && book.author!== author)
+	// 			return true	
+	// 		else
+	// 			return false
+	// 		})
+	// 	this.setState({books: updatedBooks})
+		// }
 	
 	getBooks() {
 		fetch('http://localhost:5000/get-user-books', {
@@ -45,6 +55,9 @@ class BookList extends React.Component{
 
 		this.state.books.forEach(book => {
 			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} onBookDelete = {this.onBookDelete} /></li>);
+
+			// Add back into liTag once complete
+			// <UpdateButton title = {book.title} author = {book.author} onBookUpdate = {this.onBookDelete} />
 		});
 
 		return(

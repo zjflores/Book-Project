@@ -23,6 +23,7 @@ class AddBook extends React.Component{
 		fetch('http://localhost:5000/add-book', {
 			method: "POST",
 			mode: "cors", // no-cors, cors, *same-origin
+			credentials: 'include',
 			headers: {
 				"Content-Type": "application/json",
 				// "Content-Type": "application/x-www-form-urlencoded",

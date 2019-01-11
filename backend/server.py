@@ -68,6 +68,9 @@ def add_book():
 		new_book = Book(title=data['title'], author=data['author'])
 		db.session.add(new_book)
 		db.session.commit()
+		new_user_book = BookUser(book_id=new_book.id, user_id=session['user_id'])
+		db.session.add(new_user_book)
+		db.session.commit()
 		return jsonify("Book successfully added")
 
 
@@ -77,11 +80,8 @@ def get_user_books():
 	"""Query db for a user's books"""
 
 	books = []
-	print()
-	print()
 	print(session)
-	print()
-	print()
+	
 	if 'user_id' in session:
 		q = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
 		for i in q:
@@ -96,35 +96,37 @@ def delete_book():
 	"""Remove Book from db"""
 
 	data = request.get_json()
-	print()
-	print()
 	print(data)
-	print()
-	print()
 	
 	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
-	print()
-	print()
-	print(book)
-	print()
-	print()
 
 	q = BookUser.query.filter(BookUser.book_id == book.id)
 	# q2 = BookGenre.query.filter(BookGenre.book_id == book.id)
 	if q.count() > 0:
 		user_book = q.one()
 		db.session.delete(user_book)
-		print()
-		print()
 		print(user_book)
-		print()
-		print()
 	# if q2.count() > 0:
 	# 	bookgenre = q.one()
 	# 	db.session.delete(bookgenre)
-	# db.session.delete(book)
 	db.session.commit()
 	return jsonify("Book successfully deleted")
+
+@app.route('/update-book', methods=["POST"])
+@cross_origin()
+def update_book():
+	"""Update book in db"""
+
+	data = request.get_json()
+	print(data)
+
+	# need to pass original book info inorder to query db for entry to update
+	# also need new to pass new info to update fields
+	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
+	book.title = data[""]
+
+
+	return jsonify("Update succesful")
 		
 	
 if __name__ == "__main__":
