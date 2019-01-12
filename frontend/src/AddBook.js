@@ -8,6 +8,7 @@ class AddBook extends React.Component{
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleAuthorChange = this.handleAuthorChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		
 	}
 
 	handleTitleChange(event) {
@@ -33,6 +34,7 @@ class AddBook extends React.Component{
 		.then(response => response.json())
 		.then(function(data){
 			console.log(data);
+			this.props.onBookAdd(this.state.title, this.state.author)
 		})
 		.catch(error => console.error(error));
 	}

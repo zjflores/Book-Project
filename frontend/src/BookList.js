@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddBook from './AddBook';
 import TrashButton from './TrashButton';
 import UpdateButton from './UpdateButton';
 
@@ -10,6 +11,7 @@ class BookList extends React.Component{
 		};
 		this.getBooks = this.getBooks.bind(this);
 		this.onBookDelete = this.onBookDelete.bind(this);
+		this.onBookAdd = this.onBookAdd.bind(this);
 	}
 
 	onBookDelete(title,author) {
@@ -19,6 +21,11 @@ class BookList extends React.Component{
 			else
 				return false
 			})
+		this.setState({books: newBooks})
+		}
+	onBookAdd(title,author) {
+		const newBooks = this.state.books
+		newBooks.push({title: title, author: author})
 		this.setState({books: newBooks})
 		}
 	// onBookUpdate(title,author) {
@@ -66,7 +73,17 @@ class BookList extends React.Component{
 				<div>
 					<ul>{liTags}</ul>
 				</div>
+				<div>
+				<AddBook books={this.state.books} onBookAdd={this.onBookAdd}/>
+				</div>
 			</div>
+			// switch to map and have the list iterated as new book components
+			// <div>
+			// 	{props.books.map((book.title, book.author) => (
+			// 	<Book key={book.title} title={book.title} author={book.author} />
+			// 	)}
+			// </div>
+			
 		)
 	}
 }

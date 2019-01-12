@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Home from './Home';
-import AddBook from './AddBook';
 import BookList from './BookList';
 import Login from './Login';
 
@@ -23,7 +22,6 @@ class App extends React.Component{
 				<Home/>
 				<Login onLogin = {this.onLogin}/>
 				{this.state.isLoggedIn && <BookList />}
-				{this.state.isLoggedIn && <AddBook />}
 			</div>
 		);
 	};
