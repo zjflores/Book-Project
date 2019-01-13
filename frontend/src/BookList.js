@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import AddBook from './AddBook';
-import TrashButton from './TrashButton';
-import UpdateButton from './UpdateButton';
+import Book from './Book';
+// import TrashButton from './TrashButton';
+// import UpdateButton from './UpdateButton';
 
 class BookList extends React.Component{
 	constructor(props) {
@@ -14,20 +15,24 @@ class BookList extends React.Component{
 		this.onBookAdd = this.onBookAdd.bind(this);
 	}
 
-	onBookDelete(title,author) {
-		const newBooks = this.state.books.filter((book,index) => {
-			if (book.title !== title && book.author!== author)
-				return true	
-			else
-				return false
-			})
-		this.setState({books: newBooks})
-		}
-	onBookAdd(title,author) {
-		const newBooks = this.state.books
-		newBooks.push({title: title, author: author})
-		this.setState({books: newBooks})
-		}
+	// onBookDelete(title,author) {
+	// 	const newBooks = this.state.books.filter((book,index) => {
+	// 		if (book.title !== title && book.author!== author)
+	// 			return true	
+	// 		else
+	// 			return false
+	// 		})
+	// 	this.setState({books: newBooks})
+	// 	// wait for server return when successful a list of books
+	// 	}
+
+	// onBookAdd(title,author) {
+	// 	const newBooks = this.state.books
+	// 	newBooks.push({title: title, author: author})
+	// 	this.setState({books: newBooks})
+	// 	}
+
+
 	// onBookUpdate(title,author) {
 	// 	const updatedBooks = this.state.books.filter((book,index) => {
 	// 		if (book.title !== title && book.author!== author)
@@ -37,6 +42,7 @@ class BookList extends React.Component{
 	// 		})
 	// 	this.setState({books: updatedBooks})
 		// }
+
 	
 	getBooks() {
 		fetch('http://localhost:5000/get-user-books', {
@@ -58,31 +64,16 @@ class BookList extends React.Component{
 	componentDidMount() {this.getBooks()}
 	
 	render() {
-		let liTags = [];
-
-		this.state.books.forEach(book => {
-			liTags.push(<li>{book.title} - {book.author} <TrashButton title = {book.title} author = {book.author} onBookDelete = {this.onBookDelete} /><UpdateButton/></li>);
-
-			// Add back into liTag once complete
-			// <UpdateButton title = {book.title} author = {book.author} onBookUpdate = {this.onBookDelete} />
-		});
-
 		return(
 			<div>
-				<h2>User's Books</h2>
+				<h2>User''s Books</h2>
 				<div>
-					<ul>{liTags}</ul>
+					{this.state.books.map(book => <Book key={book.title} title={book.title} author={book.author} />)}
 				</div>
 				<div>
-				<AddBook books={this.state.books} onBookAdd={this.onBookAdd}/>
+					<AddBook books={this.state.books} onBookAdd={this.onBookAdd}/>
 				</div>
 			</div>
-			// switch to map and have the list iterated as new book components
-			// <div>
-			// 	{props.books.map((book.title, book.author) => (
-			// 	<Book key={book.title} title={book.title} author={book.author} />
-			// 	)}
-			// </div>
 			
 		)
 	}
