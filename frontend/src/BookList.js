@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import AddBook from './AddBook';
 import Book from './Book';
-// import TrashButton from './TrashButton';
-// import UpdateButton from './UpdateButton';
 
 class BookList extends React.Component{
 	constructor(props) {
@@ -15,22 +13,22 @@ class BookList extends React.Component{
 		this.onBookAdd = this.onBookAdd.bind(this);
 	}
 
-	// onBookDelete(title,author) {
-	// 	const newBooks = this.state.books.filter((book,index) => {
-	// 		if (book.title !== title && book.author!== author)
-	// 			return true	
-	// 		else
-	// 			return false
-	// 		})
-	// 	this.setState({books: newBooks})
-	// 	// wait for server return when successful a list of books
-	// 	}
+	onBookDelete(title,author) {
+		const newBooks = this.state.books.filter((book,index) => {
+			if (book.title !== title && book.author!== author)
+				return true	
+			else
+				return false
+			})
+		this.setState({books: newBooks})
+		// wait for server return when successful a list of books
+		}
 
-	// onBookAdd(title,author) {
-	// 	const newBooks = this.state.books
-	// 	newBooks.push({title: title, author: author})
-	// 	this.setState({books: newBooks})
-	// 	}
+	onBookAdd(title,author) {
+		const newBooks = this.state.books
+		newBooks.push({title: title, author: author})
+		this.setState({books: newBooks})
+		}
 
 
 	// onBookUpdate(title,author) {
@@ -55,7 +53,7 @@ class BookList extends React.Component{
 			}
 		})
 		.then(response => response.json())
-		.then((data) => {
+		.then(data => {
 			console.log(data);
 			this.setState({books: data})
 		})
@@ -66,12 +64,12 @@ class BookList extends React.Component{
 	render() {
 		return(
 			<div>
-				<h2>User''s Books</h2>
+				<h2>User's Books</h2>
 				<div>
-					{this.state.books.map(book => <Book key={book.title} title={book.title} author={book.author} />)}
+					{this.state.books.map(book => <Book key={book.title} title={book.title} author={book.author} onBookDelete = {this.onBookDelete} />)}
 				</div>
 				<div>
-					<AddBook books={this.state.books} onBookAdd={this.onBookAdd}/>
+					<AddBook onBookAdd={this.onBookAdd}/>
 				</div>
 			</div>
 			

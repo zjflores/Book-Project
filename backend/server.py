@@ -7,7 +7,6 @@ from model import User, Book, BookUser, connect_to_db, db
 from data.keys.secret_keys import flask
 
 app = Flask(__name__)
-#CORS(app)
 cors = CORS(app, resources={r"/*": { r"supports_credentials":True, r"origins": r"http://localhost:3000" }})
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = flask.secret
@@ -40,11 +39,7 @@ def login():
 		if q.count() > 0:
 			user = q.one()
 			session['user_id'] = user.id
-			print()
-			print()
 			print(session)
-			print()
-			print()
 			return jsonify("Successfully logged in for %s" % user.id)
 		else:
 			return jsonify("Invalid credentials")
@@ -112,18 +107,18 @@ def delete_book():
 	db.session.commit()
 	return jsonify("Book successfully deleted")
 
-@app.route('/update-book', methods=["POST"])
-@cross_origin()
-def update_book():
-	"""Update book in db"""
+# @app.route('/update-book', methods=["POST"])
+# @cross_origin()
+# def update_book():
+# 	"""Update book in db"""
 
-	data = request.get_json()
-	print(data)
+# 	data = request.get_json()
+# 	print(data)
 
-	# need to pass original book info inorder to query db for entry to update
-	# also need new to pass new info to update fields
-	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
-	book.title = data[""]
+# 	# need to pass original book info inorder to query db for entry to update
+# 	# also need new to pass new info to update fields
+# 	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
+# 	book.title = data[""]
 
 
 	return jsonify("Update succesful")

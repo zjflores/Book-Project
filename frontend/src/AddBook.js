@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 class AddBook extends React.Component{
 	constructor(props) {
 		super(props);
-		this.state = {title:'', author:''};
-
+		this.state = {
+			title:'', 
+			author:''
+		};
 		this.handleTitleChange = this.handleTitleChange.bind(this);
 		this.handleAuthorChange = this.handleAuthorChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
-		
 	}
 
 	handleTitleChange(event) {
@@ -32,7 +33,7 @@ class AddBook extends React.Component{
 			body: JSON.stringify({title:this.state.title, author:this.state.author})
 		})
 		.then(response => response.json())
-		.then(function(data){
+		.then(data => {
 			console.log(data);
 			this.props.onBookAdd(this.state.title, this.state.author)
 		})
