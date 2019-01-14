@@ -107,20 +107,18 @@ def delete_book():
 	db.session.commit()
 	return jsonify("Book successfully deleted")
 
-# @app.route('/update-book', methods=["POST"])
-# @cross_origin()
-# def update_book():
-# 	"""Update book in db"""
+@app.route('/update-book', methods=["POST"])
+@cross_origin()
+def update_book():
+	"""Update book in db"""
 
-# 	data = request.get_json()
-# 	print(data)
-
-# 	# need to pass original book info inorder to query db for entry to update
-# 	# also need new to pass new info to update fields
-# 	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
-# 	book.title = data[""]
-
-
+	data = request.get_json()
+	print(data)
+	
+	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
+	book.title = data["newTitle"]
+	book.author = data["newAuthor"]
+	db.session.commit()
 	return jsonify("Update succesful")
 		
 	

@@ -11,6 +11,7 @@ class BookList extends React.Component{
 		this.getBooks = this.getBooks.bind(this);
 		this.onBookDelete = this.onBookDelete.bind(this);
 		this.onBookAdd = this.onBookAdd.bind(this);
+		this.onBookUpdate=this.onBookUpdate.bind(this);
 	}
 
 	onBookDelete(title,author) {
@@ -31,15 +32,16 @@ class BookList extends React.Component{
 		}
 
 
-	// onBookUpdate(title,author) {
-	// 	const updatedBooks = this.state.books.filter((book,index) => {
-	// 		if (book.title !== title && book.author!== author)
-	// 			return true	
-	// 		else
-	// 			return false
-	// 		})
-	// 	this.setState({books: updatedBooks})
-		// }
+	onBookUpdate(title,author,newTitle,newAuthor) {
+		const updatedBooks = this.state.books.filter((book,index) => {
+			if (book.title !== title && book.author!== author)
+				return true	
+			else
+				return false
+			})
+		updatedBooks.push({title: newTitle, author: newAuthor})
+		this.setState({books: updatedBooks})
+		}
 
 	
 	getBooks() {
@@ -66,7 +68,7 @@ class BookList extends React.Component{
 			<div>
 				<h2>User's Books</h2>
 				<div>
-					{this.state.books.map(book => <Book key={book.title} title={book.title} author={book.author} onBookDelete = {this.onBookDelete} />)}
+					{this.state.books.map(book => <Book key={book.title} title={book.title} author={book.author} onBookDelete = {this.onBookDelete} onBookUpdate={this.onBookUpdate} />)}
 				</div>
 				<div>
 					<AddBook onBookAdd={this.onBookAdd}/>
