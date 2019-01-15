@@ -27,7 +27,7 @@ class App extends React.Component{
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 						<Navbar.Brand>
-							<Link to="/">Home</Link>
+							{/* <Link to="/">Home</Link> */}
 						</Navbar.Brand>
 						<Navbar.Toggle />
 						</Navbar.Header>
