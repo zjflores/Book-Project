@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import AddBook from './AddBook';
 import Book from './Book';
 
@@ -23,31 +23,22 @@ class BookList extends React.Component{
 			})
 		this.setState({books: newBooks})
 		// wait for server return when successful a list of books
-		}
+	}
 
 	onBookAdd(title,author) {
 		const newBooks = this.state.books
 		newBooks.push({title: title, author: author})
 		this.setState({books: newBooks})
-		}
-
+	}
 
 	onBookUpdate(title,author,newTitle,newAuthor) {
-		console.log(title)
-		console.log(author)
-		console.log(newTitle)
-		console.log(newAuthor)
+		// Object.assign({}, this.state.books)
 		const updatedBooks = this.state.books.filter((book) => {
-			if (book.title !== title && book.author!== author)
-				return true	
-			else
-				return false
+			return book.title !== title && book.author!== author
 			})
-		console.log(updatedBooks)
 		updatedBooks.push({title: newTitle, author: newAuthor})
 		this.setState({books: updatedBooks})
-		}
-
+	}
 	
 	getBooks() {
 		fetch('http://localhost:5000/get-user-books', {
@@ -74,11 +65,14 @@ class BookList extends React.Component{
 				<h2>User's Books</h2>
 				<div>
 					{this.state.books.map(book => 
-					<Book key={book.title} 
-						  title={book.title} 
-						  author={book.author} 
-						  onBookDelete = {this.onBookDelete} 
-						  onBookUpdate={this.onBookUpdate} />)}
+						<Book 
+							key={book.title} 
+							title={book.title} 
+							author={book.author} 
+							onBookDelete = {this.onBookDelete} 
+							onBookUpdate={this.onBookUpdate} 
+						/>
+					)}
 				</div>
 				<div>
 					<AddBook onBookAdd={this.onBookAdd}/>

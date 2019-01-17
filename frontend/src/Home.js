@@ -1,12 +1,5 @@
-// create a "class" constructor
-// within constructor create state that holds empty quote string
-// create lifecycle with didmount
-// within there make fetch request
-// fetch('http://localhost:5000').then(res => res.json()).then(data => connsole.log(data))
-// update state with data
-// in render make sure to use quotes state not edit src app
-
 import React, { Component } from 'react';
+import NavBar from './NavBar';
 
 class Home extends Component {
 	constructor(props){
@@ -29,6 +22,7 @@ class Home extends Component {
 	  return (
 		<div className="Home">
 		  <header className="Home">
+			<NavBar/>
 			<img src="https://assets.atlasobscura.com/article_images/54798/image.jpg" className="Library" alt="Library" />
 			<p>
 			  {this.state.quote}

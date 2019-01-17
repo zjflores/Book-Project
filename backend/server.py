@@ -25,6 +25,25 @@ def index():
 	react_dict["quote"] = '“Never trust anyone who has not brought a book with them.” – Lemony Snicket'
 	return jsonify(react_dict)
 
+
+@app.route('/register', methods=['POST'])
+@cross_origin()
+def register():
+	"""Registers new user, adds them to db"""
+
+	data = request.get_json()
+	print(data)
+
+	q = User.query.filter(User.email == data["email"])
+	if q.count() > 0:
+		return jsonify("User not added.")
+	else:
+		new_user = User(name=data["name"], email=data["email"], password=data["password"])
+		db.session.add(new_user)
+		db.session.commit()
+		return jsonify("User successfully added to db")
+
+
 @app.route('/login', methods=['POST'])
 @cross_origin()
 def login():
@@ -45,6 +64,18 @@ def login():
 			return jsonify("Invalid credentials")
 	else:
 		return jsonify("User does not exist")
+
+
+@app.route('/logout')
+@cross_origin()
+def logout():
+	"""Remove user from session"""
+
+	data = request.get_json()
+	print(data)
+
+	session.clear()
+	return jsonify("User has been logged out")
 
 
 @app.route('/add-book', methods=['POST'])
@@ -114,7 +145,7 @@ def update_book():
 
 	data = request.get_json()
 	print(data)
-	
+
 	book= Book.query.filter((Book.title == data["title"]) & (Book.author == data["author"])).one()
 	book.title = data["newTitle"]
 	book.author = data["newAuthor"]

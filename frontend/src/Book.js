@@ -1,0 +1,82 @@
+import React, { Component } from 'react';
+import TrashButton from './TrashButton';
+// import UpdateButton from './UpdateButton';
+
+class Book extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			updateClicked: false,
+			saveClicked: false,
+			newTitle: this.props.title,	
+			newAuthor: this.props.author
+		};
+		this.handleTitleChange = this.handleTitleChange.bind(this);
+		this.handleAuthorChange = this.handleAuthorChange.bind(this);
+		this.handleUpdateBook = this.handleUpdateBook.bind(this);
+		this.handleSaveUpdate = this.handleSaveUpdate.bind(this);
+	}
+
+	handleTitleChange(event) {
+		this.setState({newTitle: event.target.value});
+	}
+
+	handleAuthorChange(event) {
+		this.setState({newAuthor: event.target.value});
+	}
+
+	handleUpdateBook(event) {
+		event.preventDefault();
+		this.setState({updateClicked: true})
+	}
+
+	handleSaveUpdate(event) {
+		event.preventDefault();
+		fetch('http://localhost:5000/update-book', {
+			method: "POST",
+			mode: "cors", // no-cors, cors, *same-origin
+			headers: {
+				"Content-Type": "application/json",
+				// "Content-Type": "application/x-www-form-urlencoded",
+			},
+			body: JSON.stringify({title:this.props.title, author:this.props.author, newTitle:this.state.newTitle, newAuthor:this.state.newAuthor})
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			this.props.onBookUpdate(this.props.title, this.props.author, this.state.newTitle, this.state.newAuthor)
+			this.setState({updateClicked:false})
+		})
+		.catch(error => console.error(error));
+	}
+
+	render() {
+		if (this.state.updateClicked) {
+			return <div>
+					<form onSubmit={this.onBookUpdate}>
+						<label>
+							<input type="text" value={this.state.newTitle} onChange={this.handleTitleChange} />
+						</label>
+						<label>
+							<input type="text" value={this.state.newAuthor} onChange={this.handleAuthorChange} />
+						</label>
+					</form>
+					<button onClick = {this.handleSaveUpdate}>
+						Save
+					</button>
+				</div>;
+				
+		} else {
+			return <div>
+					<div>
+						{this.props.title} - {this.props.author} <TrashButton title = {this.props.title} author = {this.props.author} onBookDelete = {this.props.onBookDelete}/> <button onClick={this.handleUpdateBook}>Update</button>
+
+						{/* <UpdateButton onBookUpdate={this.props.onBookUpdate} updateClicked={this.state.updateClicked} newTitle={this.state.newTitle} newAuthor={this.state.newAuthor}/> */}
+					</div>
+				</div>;
+		}
+	}
+}
+
+
+export default Book;
