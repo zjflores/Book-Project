@@ -4,6 +4,7 @@ class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isLoggedIn: this.props.isLoggedIn,
 			email: "zeezy@zmail.com", 
 			password: "password"};
 		this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -51,7 +52,7 @@ class Login extends Component {
 						Password:
 						<input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
 					</label><br/>
-					<input type="submit" value="Submit" />
+					<input type="submit" className='btn' value="Submit" />
 				</form>
 			</div>
 		);

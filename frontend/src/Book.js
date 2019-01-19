@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import TrashButton from './TrashButton';
+import './Book.css';
 // import UpdateButton from './UpdateButton';
 
-class Book extends React.Component {
+class Book extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -69,9 +70,13 @@ class Book extends React.Component {
 		} else {
 			return <div>
 					<div>
-						{this.props.title} - {this.props.author} <TrashButton title = {this.props.title} author = {this.props.author} onBookDelete = {this.props.onBookDelete}/> <button onClick={this.handleUpdateBook}>Update</button>
-
-						{/* <UpdateButton onBookUpdate={this.props.onBookUpdate} updateClicked={this.state.updateClicked} newTitle={this.state.newTitle} newAuthor={this.state.newAuthor}/> */}
+						{this.props.title} - {this.props.author} 
+						<TrashButton 
+							title = {this.props.title} 
+							author = {this.props.author} 
+							onBookDelete = {this.props.onBookDelete}
+						/> 
+						<button className='updateButton btn' onClick = {this.handleUpdateBook}>Update</button>
 					</div>
 				</div>;
 		}
