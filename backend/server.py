@@ -39,6 +39,7 @@ def register():
 		return jsonify("User not added.")
 	else:
 		new_user = User(name=data["name"], email=data["email"], password=data["password"])
+		session['user_id'] = new_user.id
 		db.session.add(new_user)
 		db.session.commit()
 		return jsonify("User successfully added to db")
@@ -66,7 +67,7 @@ def login():
 		return jsonify("User does not exist")
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 @cross_origin()
 def logout():
 	"""Remove user from session"""
