@@ -5,10 +5,8 @@ class BookInfo extends Component {
     super(props)
     this.state = {
       genre: '',
-      startMonth: '',
-      startYear: '',
-      endMonth: '',
-      endYear: '',
+      startDate: '',
+      endDate: '',
     }
   }
   render() {
@@ -18,28 +16,16 @@ class BookInfo extends Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             Genre
-            <input
-              type="text"
-              value={this.state.title}
-              onChange={this.handleTitleChange}
-            />
+            <input type="checkbox" />
           </label>
           <br />
           <label>
-            Start Month
-            <input
-              type="text"
-              value={this.state.author}
-              onChange={this.handleAuthorChange}
-            />
+            Start date:
+            <input type="date" name="start" />
           </label>
           <label>
-            Start Year
-            <input
-              type="text"
-              value={this.state.author}
-              onChange={this.handleAuthorChange}
-            />
+            End date
+            <input type="date" name="end" />
           </label>
           <br />
           <input className="btn" type="submit" value="Submit" />

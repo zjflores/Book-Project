@@ -82,10 +82,8 @@ class BookUser(db.Model):
     book_id = db.Column(db.Integer,
                         db.ForeignKey('books.id'),
                         nullable=False)
-    start_month = db.Column(db.String(9))
-    start_year = db.Column(db.Integer)
-    end_month = db.Column(db.String(9))
-    end_year = db.Column(db.Integer)
+    start_date = db.Column(db.date)
+    end_date = db.Column(db.date)
 
     def __repr__(self):
         return "<BookUser id={} User id={} Book id={}>".format(
