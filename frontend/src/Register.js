@@ -64,6 +64,7 @@ class Register extends Component {
               <input
                 type="text"
                 value={this.state.name}
+                required
                 onChange={this.handleNameChange}
               />
             </label>
@@ -71,8 +72,9 @@ class Register extends Component {
             <label>
               Email:
               <input
-                type="text"
+                type="email"
                 value={this.state.email}
+                required
                 onChange={this.handleEmailChange}
               />
             </label>
@@ -82,6 +84,7 @@ class Register extends Component {
               <input
                 type="password"
                 value={this.state.password}
+                required
                 onChange={this.handlePasswordChange}
               />
             </label>

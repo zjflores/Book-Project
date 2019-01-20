@@ -66,7 +66,7 @@ class AddBook extends Component {
             />
           </label>
           <br />
-          <input className='btn'  type="submit" value="Submit" />
+          <input className="btn" type="submit" value="Submit" />
         </form>
       </div>
     )

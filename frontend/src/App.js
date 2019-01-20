@@ -31,7 +31,9 @@ class App extends React.Component {
     return <Login onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
   }
   renderLogout() {
-    return <Logout onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
+    return (
+      <Logout onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
+    )
   }
   renderRegister() {
     return (

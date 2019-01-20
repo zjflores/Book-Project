@@ -39,8 +39,8 @@ class Login extends Component {
     })
       .then(response => response.json())
       .then(data => {
-		console.log(data)
-		this.props.onLogin()
+        console.log(data)
+        this.props.onLogin()
       })
       .catch(error => console.error(error))
   }
@@ -55,8 +55,9 @@ class Login extends Component {
             <label>
               Email:
               <input
-                type="text"
+                type="email"
                 value={this.state.email}
+                required
                 onChange={this.handleEmailChange}
               />
             </label>
@@ -66,6 +67,7 @@ class Login extends Component {
               <input
                 type="password"
                 value={this.state.password}
+                required
                 onChange={this.handlePasswordChange}
               />
             </label>
