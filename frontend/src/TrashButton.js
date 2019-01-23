@@ -3,12 +3,7 @@ import React, { Component } from 'react'
 class TrashButton extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
-    this.state = {
-      bookId: this.props.bookId,
-      title: this.props.bookID,
-      author: this.props.author,
-    }
+    this.state = {}
     this.handleDeleteBook = this.handleDeleteBook.bind(this)
   }
 

@@ -42,27 +42,39 @@ class BookInfo extends Component {
   render() {
     return (
       <div>
-        <h2>Add book info!</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Select Book Genre(s)
-            <FilteredMultiSelect
-              onSelectionChange={this.selectedGenres}
-              options={this.state.genres}
+        <div>
+          <h2>Add book info!</h2>
+          <form onSubmit={this.handleSelectionChange}>
+            <label>
+              Select Book Genre(s)
+              <FilteredMultiSelect
+                onChange={this.selectedGenres}
+                options={this.state.genres}
+                selectedOptions={this.selectedGenres}
+              />
+            </label>
+            <button
+              type="button"
+              onClick={() => this.handleSelectionChange()}
             />
-          </label>
-          <br />
-          <label>
-            Start date:
-            <input type="date" name="start" />
-          </label>
-          <label>
-            End date
-            <input type="date" name="end" />
-          </label>
-          <br />
-          <input className="btn" type="submit" value="Submit" />
-        </form>
+          </form>
+        </div>
+        <div>
+          <form>
+            <label>
+              Start date:
+              <input type="date" name="start" />
+            </label>
+            <input className="btn" type="submit" value="Submit" />
+          </form>
+          <form>
+            <label>
+              End date
+              <input type="date" name="end" />
+            </label>
+            <input className="btn" type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     )
   }
