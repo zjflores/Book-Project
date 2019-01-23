@@ -3,12 +3,12 @@ from flask import (Flask, jsonify, redirect, request, session)
 # from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
-from model import User, Book, BookUser, connect_to_db, db
+from model import User, Book, BookUser, Genre, connect_to_db, db
 from data.keys.secret_keys import flask
 
 app = Flask(__name__)
 cors = CORS(app, resources={
-            r"/*": {r"supports_credentials": True, r"origins": r"http://localhost:3000"}})
+    r"/*": {r"supports_credentials": True, r"origins": r"http://localhost:3000"}})
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = flask.secret
 
@@ -84,6 +84,36 @@ def logout():
     return jsonify("User has been logged out")
 
 
+@app.route('/get-genres', methods=['GET'])
+@cross_origin()
+def get_genres():
+    "Query db for genres"
+
+    genres = []
+    q = Genre.query.all()
+    for i in q:
+        genres.append({'text': i.genre, 'value': i.id})
+
+    return jsonify(genres)
+
+
+@app.route('/get-user-books', methods=['GET'])
+@cross_origin()
+def get_user_books():
+    """Query db for a user's books"""
+
+    books = []
+
+    if 'user_id' in session:
+        q = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
+        for i in q:
+            book = Book.query.get(i.book_id)
+            books.append(
+                {'title': book.title, 'author': book.author, 'id': book.id})
+        print(books)
+    return jsonify(books)
+
+
 @app.route('/add-book', methods=['POST'])
 @cross_origin()
 def add_book():
@@ -95,7 +125,13 @@ def add_book():
     q = Book.query.filter((Book.title == data["title"]) & (
         Book.author == data["author"]))
     if q.count() > 0:
-        return jsonify("Book already exists")
+        book = q.one()
+        new_user_book = BookUser(book_id=book.id, user_id=session['user_id'])
+        db.session.add(new_user_book)
+        db.session.commit()
+        book = {'title': data["title"],
+                'author': data["author"], 'id': book.id}
+        return jsonify(book)
 
     else:
         new_book = Book(title=data['title'], author=data['author'])
@@ -105,24 +141,9 @@ def add_book():
             book_id=new_book.id, user_id=session['user_id'])
         db.session.add(new_user_book)
         db.session.commit()
-        return jsonify("Book successfully added")
-
-
-@app.route('/get-user-books', methods=['GET'])
-@cross_origin()
-def get_user_books():
-    """Query db for a user's books"""
-
-    books = []
-    print(session)
-
-    if 'user_id' in session:
-        q = BookUser.query.filter(BookUser.user_id == session['user_id']).all()
-        for i in q:
-            book = Book.query.get(i.book_id)
-            books.append({'title': book.title, 'author': book.author})
-        print(books)
-    return jsonify(books)
+        book = {'title': data["title"],
+                'author': data["author"], 'id': new_book.id}
+        return jsonify(book)
 
 
 @app.route('/delete-book', methods=["POST"])
@@ -132,11 +153,12 @@ def delete_book():
     data = request.get_json()
     print(data)
 
-    book = Book.query.filter((Book.title == data["title"]) & (
-        Book.author == data["author"])).one()
+    # book = Book.query.get(data["id"]).one()
+    # book = Book.query.filter((Book.title == data["title"]) & (
+    #     Book.author == data["author"])).one()
 
-    q = BookUser.query.filter(BookUser.book_id == book.id)
-    # q2 = BookGenre.query.filter(BookGenre.book_id == book.id)
+    q = BookUser.query.filter(BookUser.book_id == data["id"])
+    # q2 = BookGenre.query.filter(BookGenre.book_id == data["id")
     if q.count() > 0:
         user_book = q.one()
         db.session.delete(user_book)
@@ -156,12 +178,13 @@ def update_book():
     data = request.get_json()
     print(data)
 
-    book = Book.query.filter((Book.title == data["title"]) & (
-        Book.author == data["author"])).one()
+    book = Book.query.get(data["id"]).first()
     book.title = data["newTitle"]
     book.author = data["newAuthor"]
     db.session.commit()
-    return jsonify("Update succesful")
+    id = book.id
+    print(book.id)
+    return jsonify({id: id})
 
 
 if __name__ == "__main__":

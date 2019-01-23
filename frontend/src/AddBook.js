@@ -6,6 +6,7 @@ class AddBook extends Component {
     this.state = {
       title: '',
       author: '',
+      bookId: '',
     }
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleAuthorChange = this.handleAuthorChange.bind(this)
@@ -38,7 +39,12 @@ class AddBook extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        this.props.onBookAdd(this.state.title, this.state.author)
+        this.setState({ bookId: data.id })
+        this.props.onBookAdd(
+          this.state.title,
+          this.state.author,
+          this.state.bookId
+        )
       })
       .catch(error => console.error(error))
   }

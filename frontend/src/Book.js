@@ -1,87 +1,107 @@
-import React, { Component } from 'react';
-import TrashButton from './TrashButton';
-import './Book.css';
+import React, { Component } from 'react'
+import TrashButton from './TrashButton'
+import './Book.css'
 // import UpdateButton from './UpdateButton';
 
 class Book extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			updateClicked: false,
-			saveClicked: false,
-			newTitle: this.props.title,	
-			newAuthor: this.props.author
-		};
-		this.handleTitleChange = this.handleTitleChange.bind(this);
-		this.handleAuthorChange = this.handleAuthorChange.bind(this);
-		this.handleUpdateBook = this.handleUpdateBook.bind(this);
-		this.handleSaveUpdate = this.handleSaveUpdate.bind(this);
-	}
+  constructor(props) {
+    super(props)
+    this.state = {
+      updateClicked: false,
+      saveClicked: false,
+      newTitle: this.props.title,
+      newAuthor: this.props.author,
+    }
+    this.handleTitleChange = this.handleTitleChange.bind(this)
+    this.handleAuthorChange = this.handleAuthorChange.bind(this)
+    this.handleUpdateBook = this.handleUpdateBook.bind(this)
+    this.handleSaveUpdate = this.handleSaveUpdate.bind(this)
+  }
 
-	handleTitleChange(event) {
-		this.setState({newTitle: event.target.value});
-	}
+  handleTitleChange(event) {
+    this.setState({ newTitle: event.target.value })
+  }
 
-	handleAuthorChange(event) {
-		this.setState({newAuthor: event.target.value});
-	}
+  handleAuthorChange(event) {
+    this.setState({ newAuthor: event.target.value })
+  }
 
-	handleUpdateBook(event) {
-		event.preventDefault();
-		this.setState({updateClicked: true})
-	}
+  handleUpdateBook(event) {
+    event.preventDefault()
+    this.setState({ updateClicked: true })
+  }
 
-	handleSaveUpdate(event) {
-		event.preventDefault();
-		fetch('http://localhost:5000/update-book', {
-			method: "POST",
-			mode: "cors", // no-cors, cors, *same-origin
-			headers: {
-				"Content-Type": "application/json",
-				// "Content-Type": "application/x-www-form-urlencoded",
-			},
-			body: JSON.stringify({title:this.props.title, author:this.props.author, newTitle:this.state.newTitle, newAuthor:this.state.newAuthor})
-		})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			this.props.onBookUpdate(this.props.title, this.props.author, this.state.newTitle, this.state.newAuthor)
-			this.setState({updateClicked:false})
-		})
-		.catch(error => console.error(error));
-	}
+  handleSaveUpdate(event) {
+    event.preventDefault()
+    fetch('http://localhost:5000/update-book', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.bookId,
+        newTitle: this.state.newTitle,
+        newAuthor: this.state.newAuthor,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.props.onBookUpdate(
+          this.props.bookId,
+          this.state.newTitle,
+          this.state.newAuthor
+        )
+        this.setState({ updateClicked: false })
+      })
+      .catch(error => console.error(error))
+  }
 
-	render() {
-		if (this.state.updateClicked) {
-			return <div>
-					<form onSubmit={this.onBookUpdate}>
-						<label>
-							<input type="text" value={this.state.newTitle} onChange={this.handleTitleChange} />
-						</label>
-						<label>
-							<input type="text" value={this.state.newAuthor} onChange={this.handleAuthorChange} />
-						</label>
-					</form>
-					<button onClick = {this.handleSaveUpdate}>
-						Save
-					</button>
-				</div>;
-				
-		} else {
-			return <div>
-					<div>
-						{this.props.title} - {this.props.author} 
-						<TrashButton 
-							title = {this.props.title} 
-							author = {this.props.author} 
-							onBookDelete = {this.props.onBookDelete}
-						/> 
-						<button className='updateButton btn' onClick = {this.handleUpdateBook}>Update</button>
-					</div>
-				</div>;
-		}
-	}
+  render() {
+    if (this.state.updateClicked) {
+      return (
+        <div>
+          <form onSubmit={this.onBookUpdate}>
+            <label>
+              <input
+                type="text"
+                value={this.state.newTitle}
+                onChange={this.handleTitleChange}
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={this.state.newAuthor}
+                onChange={this.handleAuthorChange}
+              />
+            </label>
+          </form>
+          <button onClick={this.handleSaveUpdate}>Save</button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>
+            {this.props.title} - {this.props.author}
+            <TrashButton
+              bookId={this.props.bookId}
+              onBookDelete={this.props.onBookDelete}
+            />
+            <button
+              className="updateButton btn"
+              onClick={this.handleUpdateBook}
+            >
+              Update
+            </button>
+          </div>
+        </div>
+      )
+    }
+  }
 }
 
-
-export default Book;
+export default Book

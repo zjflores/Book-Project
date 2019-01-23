@@ -28,9 +28,12 @@ class NavBar extends Component {
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
-			<LinkContainer to="/logout">
-				<NavItem>Logout</NavItem>
-			</LinkContainer>
+            <LinkContainer to="/logout">
+              <NavItem>Logout</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/book/:id">
+              <NavItem>Book Info</NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
