@@ -178,7 +178,7 @@ def update_book():
     data = request.get_json()
     print(data)
 
-    book = Book.query.get(data["id"]).first()
+    book = Book.query.get(data["id"])
     book.title = data["newTitle"]
     book.author = data["newAuthor"]
     db.session.commit()

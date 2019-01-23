@@ -32,7 +32,7 @@ class BookList extends React.Component {
     const updatedBooks = this.state.books.filter(book => {
       return book.id !== bookId
     })
-    updatedBooks.push({ title: newTitle, author: newAuthor, bookId: bookId })
+    updatedBooks.push({ title: newTitle, author: newAuthor, id: bookId })
     this.setState({ books: updatedBooks })
   }
 
