@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import FilteredMultiSelect from 'react-filtered-multiselect'
+// import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link,
+// } from 'react-router-dom'
 
 class BookInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      bookId: 6,
+      // bookId: match.params.bookId,
       genres: [],
       selectedGenres: [],
       startDate: '',

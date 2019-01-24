@@ -1,6 +1,6 @@
 
 from flask import (Flask, jsonify, redirect, request, session)
-# from flask_debugtoolbar import DebugToolbarExtension
+# from Flask-DebugToolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 from model import User, Book, BookUser, Genre, connect_to_db, db

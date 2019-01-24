@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
-import BookInfo from './BookInfo'
+// import BookInfo from './BookInfo'
 
 class Home extends Component {
   constructor(props) {
@@ -32,9 +32,9 @@ class Home extends Component {
             <p>{this.state.quote}</p>
           </header>
         </div>
-        <div>
+        {/* <div>
           <BookInfo />
-        </div>
+        </div> */}
       </div>
     )
   }
