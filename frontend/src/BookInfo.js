@@ -5,16 +5,47 @@ class BookInfo extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      bookId: 6,
       genres: [],
       selectedGenres: [],
       startDate: '',
       endDate: '',
     }
     this.getGenres = this.getGenres.bind(this)
-    this.handleSelectionChange = this.handleSelectionChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
+    this.handleDeselect = this.handleDeselect.bind(this)
+    this.handleSubmitGenres = this.handleSubmitGenres.bind(this)
   }
-  handleSelectionChange = selectedGenres => {
+  handleSelect(selectedGenres) {
     this.setState({ selectedGenres })
+  }
+
+  handleDeselect(deselectedGenres) {
+    // Object.assign({}, this.state.selectedGenres)
+    const genresSelected = this.state.selectedGenres.filter(genre => {
+      return genre.text !== genre
+    })
+    this.setState({ selectedGenres: genresSelected })
+  }
+
+  handleSubmitGenres() {
+    fetch('http://localhost:5000/set-genres', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.bookId,
+        genres: this.selectedGenres,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => console.error(error))
   }
 
   getGenres() {
@@ -42,23 +73,32 @@ class BookInfo extends Component {
   render() {
     return (
       <div>
+        <h2>Add book info!</h2>
         <div>
-          <h2>Add book info!</h2>
-          <form onSubmit={this.handleSelectionChange}>
+          <form onSubmit={this.handleSelect}>
             <label>
               Select Book Genre(s)
               <FilteredMultiSelect
-                onChange={this.selectedGenres}
+                buttonText="Add"
+                onChange={this.handleSelect}
                 options={this.state.genres}
                 selectedOptions={this.selectedGenres}
               />
             </label>
-            <button
-              type="button"
-              onClick={() => this.handleSelectionChange()}
-            />
+            <label>
+              <FilteredMultiSelect
+                buttonText="Remove"
+                onChange={this.handleDeselect}
+                options={this.state.selectedGenres}
+                showFilter={false}
+              />
+            </label>
+            <button type="button" onClick={this.handleSubmitGenres()}>
+              Submit
+            </button>
           </form>
         </div>
+        <br />
         <div>
           <form>
             <label>
@@ -67,6 +107,7 @@ class BookInfo extends Component {
             </label>
             <input className="btn" type="submit" value="Submit" />
           </form>
+          <br />
           <form>
             <label>
               End date

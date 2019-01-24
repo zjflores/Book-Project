@@ -5,7 +5,7 @@ import './App.css'
 import './Base.css'
 import Home from './Home'
 import BookList from './BookList'
-import BookInfo from './BookInfo'
+// import BookInfo from './BookInfo'
 import Login from './Login'
 import Register from './Register'
 import Logout from './Logout'
@@ -51,7 +51,7 @@ class App extends React.Component {
             <Route path="/login" component={this.renderLogin} />
             <Route path="/books" component={BookList} />
             <Route path="/logout" component={this.renderLogout} />
-            <Route path="/book/:id" component={BookInfo} />
+            {/* <Route path="/book/:id" component={BookInfo} /> */}
           </div>
         </div>
       </Router>

@@ -97,6 +97,17 @@ def get_genres():
     return jsonify(genres)
 
 
+@app.route('/set-genres')
+@cross_origin
+def set_genres():
+    """Add new BookGenre Entry"""
+
+    data = request.get_json()
+    print(data)
+
+    return jsonify("Touched server")
+
+
 @app.route('/get-user-books', methods=['GET'])
 @cross_origin()
 def get_user_books():
