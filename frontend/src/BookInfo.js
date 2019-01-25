@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import FilteredMultiSelect from 'react-filtered-multiselect'
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link,
-// } from 'react-router-dom'
 
 class BookInfo extends Component {
   constructor(props) {
     super(props)
+    console.log(this.props.match.params.bookId)
     this.state = {
-      // bookId: match.params.bookId,
       genres: [],
       selectedGenres: [],
       startDate: '',
@@ -19,22 +14,39 @@ class BookInfo extends Component {
     this.getGenres = this.getGenres.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
     this.handleDeselect = this.handleDeselect.bind(this)
+    this.handleStartDateChange = this.handleStartDateChange.bind(this)
+    this.handleEndDateChange = this.handleEndDateChange.bind(this)
     this.handleSubmitGenres = this.handleSubmitGenres.bind(this)
+    this.handleSubmitStartDate = this.handleSubmitStartDate.bind(this)
+    this.handleSubmitEndDate = this.handleSubmitEndDate.bind(this)
   }
-  handleSelect(selectedGenres) {
-    this.setState({ selectedGenres })
+  handleSelect(addGenres) {
+    const newSelectedGenres = this.state.selectedGenres.concat(addGenres)
+    this.setState({ selectedGenres: newSelectedGenres })
   }
 
   handleDeselect(deselectedGenres) {
     // Object.assign({}, this.state.selectedGenres)
     const genresSelected = this.state.selectedGenres.filter(genre => {
-      return genre.text !== genre
+      for (let i = 0; i < deselectedGenres.length; i++) {
+        if (deselectedGenres[i].text === genre.text) {
+          return false
+        }
+      }
+
+      return true
     })
     this.setState({ selectedGenres: genresSelected })
   }
-
-  handleSubmitGenres() {
-    fetch('http://localhost:5000/set-genres', {
+  handleStartDateChange(event) {
+    this.setState({ startDate: event.target.value })
+  }
+  handleEndDateChange(event) {
+    this.setState({ endDate: event.target.value })
+  }
+  handleSubmitStartDate(event) {
+    event.preventDefault()
+    fetch('http://localhost:5000/book/set-start-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       headers: {
@@ -42,8 +54,51 @@ class BookInfo extends Component {
         // "Content-Type": "application/x-www-form-urlencoded",
       },
       body: JSON.stringify({
-        id: this.props.bookId,
-        genres: this.selectedGenres,
+        id: this.props.match.params.bookId,
+        start: this.state.startDate,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => console.error(error))
+  }
+
+  handleSubmitEndDate(event) {
+    event.preventDefault()
+    fetch('http://localhost:5000/book/set-end-date', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.bookId,
+        end: this.state.endDate,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => console.error(error))
+  }
+
+  handleSubmitGenres(event) {
+    event.preventDefault()
+    fetch('http://localhost:5000/set-genres', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.bookId,
+        genres: this.state.selectedGenres,
       }),
     })
       .then(response => response.json())
@@ -80,7 +135,7 @@ class BookInfo extends Component {
       <div>
         <h2>Add book info!</h2>
         <div>
-          <form onSubmit={this.handleSelect}>
+          <form onSubmit={this.handleSubmitGenres}>
             <label>
               Select Book Genre(s)
               <FilteredMultiSelect
@@ -98,25 +153,33 @@ class BookInfo extends Component {
                 showFilter={false}
               />
             </label>
-            <button type="button" onClick={this.handleSubmitGenres()}>
-              Submit
-            </button>
+            <input type="submit" value="Submit" />
           </form>
         </div>
         <br />
         <div>
-          <form>
+          <form onSubmit={this.handleSubmitStartDate}>
             <label>
               Start date:
-              <input type="date" name="start" />
+              <input
+                type="date"
+                name="start"
+                value={this.state.startDate}
+                onChange={this.handleStartDateChange}
+              />
             </label>
             <input className="btn" type="submit" value="Submit" />
           </form>
           <br />
-          <form>
+          <form onSubmit={this.handleSubmitEndDate}>
             <label>
-              End date
-              <input type="date" name="end" />
+              End date:
+              <input
+                type="date"
+                name="end"
+                value={this.state.endDate}
+                onChange={this.handleEndDateChange}
+              />
             </label>
             <input className="btn" type="submit" value="Submit" />
           </form>

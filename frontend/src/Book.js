@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TrashButton from './TrashButton'
 import './Book.css'
-// import UpdateButton from './UpdateButton';
+import { NavLink } from 'react-router-dom'
 
 class Book extends Component {
   constructor(props) {
@@ -86,7 +86,9 @@ class Book extends Component {
       return (
         <div>
           <div>
-            {this.props.title} - {this.props.author}
+            <NavLink to={`/book/${this.props.bookId}`}>
+              {this.props.title} - {this.props.author}
+            </NavLink>
             <TrashButton
               bookId={this.props.bookId}
               onBookDelete={this.props.onBookDelete}

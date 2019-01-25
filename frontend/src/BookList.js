@@ -1,7 +1,6 @@
 import React from 'react'
 import AddBook from './AddBook'
 import Book from './Book'
-import { Link } from 'react-router-dom'
 
 class BookList extends React.Component {
   constructor(props) {
@@ -65,16 +64,14 @@ class BookList extends React.Component {
         <div>
           {this.state.books.map(book => {
             return (
-              <Link to="/book/:bookId">
-                <Book
-                  key={book.id}
-                  title={book.title}
-                  author={book.author}
-                  bookId={book.id}
-                  onBookDelete={this.onBookDelete}
-                  onBookUpdate={this.onBookUpdate}
-                />
-              </Link>
+              <Book
+                key={book.id}
+                title={book.title}
+                author={book.author}
+                bookId={book.id}
+                onBookDelete={this.onBookDelete}
+                onBookUpdate={this.onBookUpdate}
+              />
             )
           })}
         </div>
