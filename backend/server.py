@@ -98,7 +98,7 @@ def get_genres():
 
 
 @app.route('/set-genres', methods=['POST'])
-@cross_origin
+@cross_origin()
 def set_genres():
     """Adds new BookGenre entries"""
 
@@ -107,12 +107,7 @@ def set_genres():
     print(data)
 
     for genre in data["genres"]:
-        genre = genre["text"]
-        print(genre)
-        genre_id = genre["value"]
-        print(genre_id)
-
-        new_book_genre = BookGenre(book_id=data["id"], genre_id=genre_id)
+        new_book_genre = BookGenre(book_id=data["id"], genre_id=genre["value"])
         db.session.add(new_book_genre)
     db.session.commit()
     return jsonify("Genres added")
@@ -191,27 +186,40 @@ def update_book():
 
     data = request.get_json()
     print(data)
-    print(session)
+    print(session['user_id'])
 
     q = BookUser.query.filter(BookUser.book_id == data["id"])
 
     if q.count() > 1:
         print("More than one user has read this title.")
         new_book = Book(title=data["newTitle"], author=data["newAuthor"])
+        print(1)
         db.session.add(new_book)
+        print(2)
         db.session.commit()
+        print(3)
         print(new_book)
+        print(4)
         if "user_id" in session:
             new_user_book = BookUser(
                 book_id=new_book.id, user_id=session['user_id'])
+            print(5)
             db.session.add(new_user_book)
+            print(6)
             old_user_book = BookUser.query.filter(
                 (BookUser.user_id == session["user_id"]) & (BookUser.book_id == data["id"])).one()
-            db.session.delete(old_user_book)
+            print(7)
             db.session.commit()
+            print(8)
+            db.session.delete(old_user_book)
+            print(9)
+            db.session.commit()
+            print(10)
             print(new_user_book)
+            print(11)
             book = {'title': data["newTitle"],
                     'author': data["newAuthor"], 'id': new_book.id}
+            print(12)
             return jsonify(book)
     else:
         print("You are the only user reading this title. You may update")

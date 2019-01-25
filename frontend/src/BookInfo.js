@@ -70,6 +70,7 @@ class BookInfo extends Component {
     fetch('http://localhost:5000/book/set-end-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
         // "Content-Type": "application/x-www-form-urlencoded",
