@@ -22,6 +22,9 @@ class NavBar extends Component {
             <LinkContainer to="/books">
               <NavItem>Books</NavItem>
             </LinkContainer>
+            <LinkContainer to="/users">
+              <NavItem>Users</NavItem>
+            </LinkContainer>
             <LinkContainer to="/register">
               <NavItem>Register</NavItem>
             </LinkContainer>

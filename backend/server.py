@@ -113,6 +113,22 @@ def set_genres():
     return jsonify("Genres added")
 
 
+@app.route('/get-users', methods=['GET'])
+@cross_origin()
+def get_users():
+    """Return list of users from db."""
+
+    users = []
+    print("session id: {}".format(session['user_id']))
+
+    q = User.query.all()
+    print(q)
+    for user in q:
+        if user.id != session['user_id']:
+            users.append({'name': user.name, 'id': user.id})
+    return jsonify(users)
+
+
 @app.route('/get-user-books', methods=['GET'])
 @cross_origin()
 def get_user_books():
