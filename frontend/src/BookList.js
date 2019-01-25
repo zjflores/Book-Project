@@ -37,7 +37,7 @@ class BookList extends React.Component {
   }
 
   getBooks() {
-    fetch('http://localhost:5000/get-user-books', {
+    fetch('http://localhost:5000/get-your-books', {
       method: 'GET',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

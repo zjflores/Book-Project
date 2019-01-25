@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 
 class User extends Component {
   constructor(props) {
@@ -8,7 +9,14 @@ class User extends Component {
     }
   }
   render() {
-    return <div>{this.props.name}</div>
+    return (
+      <div>
+        <NavLink to={`/user/${this.props.userId}/books`}>
+          {this.props.name}
+        </NavLink>
+      </div>
+    )
   }
 }
+
 export default User

@@ -10,7 +10,7 @@ import Login from './Login'
 import Register from './Register'
 import Logout from './Logout'
 import UserList from './UserList'
-import User from './User'
+import UserBooks from './UserBooks'
 
 class App extends React.Component {
   constructor(props) {
@@ -55,6 +55,7 @@ class App extends React.Component {
             <Route path="/logout" component={this.renderLogout} />
             <Route path="/book/:bookId" component={BookInfo} />
             <Route path="/users" component={UserList} />
+            <Route pathe="/user/:id/books" component={UserBooks} />
           </div>
         </div>
       </Router>

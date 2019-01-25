@@ -129,10 +129,28 @@ def get_users():
     return jsonify(users)
 
 
-@app.route('/get-user-books', methods=['GET'])
+@app.route('/get-user-books', methods=['POST'])
 @cross_origin()
 def get_user_books():
     """Query db for a user's books"""
+    data = request.get_json()
+    print(data)
+
+    books = []
+
+    q = BookUser.query.filter(BookUser.user_id == data['id']).all()
+    for i in q:
+        book = Book.query.get(i.book_id)
+        books.append(
+            {'title': book.title, 'author': book.author, 'id': book.id})
+    print(books)
+    return jsonify(books)
+
+
+@app.route('/get-your-books', methods=['GET'])
+@cross_origin()
+def get_your_books():
+    """Query db for logged in user's books"""
 
     books = []
     print("session id: {}".format(session['user_id']))
