@@ -7,6 +7,7 @@ class Book extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      bookId: this.props.bookId,
       updateClicked: false,
       saveClicked: false,
       newTitle: this.props.title,

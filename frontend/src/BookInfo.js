@@ -38,12 +38,15 @@ class BookInfo extends Component {
     })
     this.setState({ selectedGenres: genresSelected })
   }
+
   handleStartDateChange(event) {
     this.setState({ startDate: event.target.value })
   }
+
   handleEndDateChange(event) {
     this.setState({ endDate: event.target.value })
   }
+
   handleSubmitStartDate(event) {
     event.preventDefault()
     fetch('http://localhost:5000/book/set-start-date', {

@@ -189,48 +189,51 @@ def update_book():
     print(session['user_id'])
 
     q = BookUser.query.filter(BookUser.book_id == data["id"])
+    q2 = Book.query.filter((Book.title == data["newTitle"]) & (
+        Book.author == data["newAuthor"]))
 
-    if q.count() > 1:
-        print("More than one user has read this title.")
-        new_book = Book(title=data["newTitle"], author=data["newAuthor"])
-        print(1)
-        db.session.add(new_book)
-        print(2)
-        db.session.commit()
-        print(3)
-        print(new_book)
-        print(4)
-        if "user_id" in session:
+    if q.count() == 1:
+        if q2.count() == 1:
+            book = q2.one()
+            new_book = BookUser(book_id=book.id, user_id=session['user_id'])
+            db.session.add(new_book)
+            db.session.commit()
+            book = {'title': book.title,
+                    'author': book.author, 'id': book.id}
+            return jsonify(book)
+        else:
+            new_book = Book(title=data["newTitle"], author=data["newAuthor"])
+            db.session.add(new_book)
+            db.session.commit()
             new_user_book = BookUser(
                 book_id=new_book.id, user_id=session['user_id'])
-            print(5)
             db.session.add(new_user_book)
-            print(6)
             old_user_book = BookUser.query.filter(
                 (BookUser.user_id == session["user_id"]) & (BookUser.book_id == data["id"])).one()
-            print(7)
             db.session.commit()
-            print(8)
             db.session.delete(old_user_book)
-            print(9)
             db.session.commit()
-            print(10)
-            print(new_user_book)
-            print(11)
             book = {'title': data["newTitle"],
                     'author': data["newAuthor"], 'id': new_book.id}
-            print(12)
             return jsonify(book)
     else:
-        print("You are the only user reading this title. You may update")
-        book = Book.query.get(data["id"])
-        book.title = data["newTitle"]
-        book.author = data["newAuthor"]
-        db.session.commit()
-        book = {'title': data["newTitle"],
-                'author': data["newAuthor"], 'id': book.id}
-        return jsonify(book)
-    return jsonify("I'm broken")
+        if q2.count() == 1:
+            book = q2.one()
+            print(book)
+            new_book = BookUser(book_id=book.id, user_id=session['user_id'])
+            db.session.add(new_book)
+            db.session.commit()
+            book = {'title': book.title,
+                    'author': book.author, 'id': book.id}
+            return jsonify(book)
+        else:
+            book = Book.query.get(data["id"])
+            book.title = data["newTitle"]
+            book.author = data["newAuthor"]
+            db.session.commit()
+            book = {'title': data["newTitle"],
+                    'author': data["newAuthor"], 'id': book.id}
+            return jsonify(book)
 
 
 @app.route('/book/set-start-date', methods=['POST'])
