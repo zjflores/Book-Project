@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-// import TrashButton from './TrashButton'
-// import './Book.css'
 import { NavLink } from 'react-router-dom'
 
-class Book extends Component {
+class UserBooks extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.match.params.userId)
+    console.log(this.props.match.params.id)
+
     this.state = {
       books: [],
     }
@@ -23,7 +22,7 @@ class Book extends Component {
         // "Content-Type": "application/x-www-form-urlencoded",
       },
       body: JSON.stringify({
-        id: this.props.match.params.userId,
+        id: this.props.match.params.id,
       }),
     })
       .then(response => response.json())
@@ -40,14 +39,22 @@ class Book extends Component {
   render() {
     return (
       <div>
+        <h2>User {this.props.match.params.id}'s Books</h2>
         <div>
-          <NavLink to={`/book/${this.props.bookId}`}>
-            {this.props.title} - {this.props.author}
-          </NavLink>
+          {this.state.books.map(book => {
+            return (
+              <div>
+                <NavLink to={`/book/${this.props.match.params.id}`}>
+                  {book.title} - {book.author}
+                </NavLink>
+              </div>
+            )
+          })}
+          <br />
         </div>
       </div>
     )
   }
 }
 
-export default Book
+export default UserBooks

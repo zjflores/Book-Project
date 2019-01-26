@@ -55,7 +55,7 @@ class App extends React.Component {
             <Route path="/logout" component={this.renderLogout} />
             <Route path="/book/:bookId" component={BookInfo} />
             <Route path="/users" component={UserList} />
-            <Route pathe="/user/:id/books" component={UserBooks} />
+            <Route path="/user/:id/books" component={UserBooks} />
           </div>
         </div>
       </Router>
