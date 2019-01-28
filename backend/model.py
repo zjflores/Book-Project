@@ -85,6 +85,7 @@ class BookUser(db.Model):
                         nullable=False)
     start_date = db.Column(db.Date)
     end_date = db.Column(db.Date)
+    UniqueConstraint(user_id, book_id)
 
     def __repr__(self):
         return "<BookUser id={} User id={} Book id={}>".format(

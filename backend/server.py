@@ -348,7 +348,7 @@ def get_start_date():
     print(data)
 
     book_user = BookUser.query.filter((BookUser.book_id==data['book_id']) & (BookUser.user_id==data['id'])).one()
-    return jsonify(book_user.end_date)
+    return jsonify(book_user.start_date)
 
 
 @app.route('/get-end-date', methods=['POST'])
@@ -360,7 +360,7 @@ def get_end_date():
     return jsonify(book_user.end_date)
 
 
-@app.route('/get-reader', methods=['POST'])
+@app.route('/get-readers', methods=['POST'])
 @cross_origin()
 def get_readers():
     data = request.get_json()
@@ -371,11 +371,29 @@ def get_readers():
     q = BookUser.query.filter(BookUser.book_id==data['book_id'])
 
     if q.count() > 1:
-        for i in q:
-            if i.id != data['id']:
-                user = User.query.get(i.id)
+        for i in q.all():
+            print(i.user_id)
+            if int(i.user_id) != int(data['id']):
+                user = User.query.get(i.user_id)
                 reader = {"name": user.fname, "id": user.id}
                 readers.append(reader)
+    return jsonify(readers)
+
+@app.route('/get-authorization', methods=['POST'])
+@cross_origin()
+def get_authorization():
+    data = request.get_json()
+    print()
+    print()
+    print(data)
+    print(session['user_id'])
+    print()
+    print()
+
+    if int(data['id']) == session['user_id']:
+        return jsonify("woo"), status.HTTP_200_OK
+    else:
+        return jsonify("nope"), status.HTTP_401_UNAUTHORIZED
 
 
 if __name__ == "__main__":

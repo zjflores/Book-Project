@@ -10,6 +10,7 @@ class BookForms extends Component {
       selectedGenres: [],
       startDate: '',
       endDate: '',
+      title: '',
     }
     this.getGenres = this.getGenres.bind(this)
     this.handleSelect = this.handleSelect.bind(this)
@@ -19,6 +20,7 @@ class BookForms extends Component {
     this.handleSubmitGenres = this.handleSubmitGenres.bind(this)
     this.handleSubmitStartDate = this.handleSubmitStartDate.bind(this)
     this.handleSubmitEndDate = this.handleSubmitEndDate.bind(this)
+    this.getTitle = this.getTitle.bind(this)
   }
   handleSelect(addGenres) {
     const newSelectedGenres = this.state.selectedGenres.concat(addGenres)
@@ -130,14 +132,36 @@ class BookForms extends Component {
       .catch(error => console.error(error))
   }
 
+  getTitle() {
+    fetch('http://localhost:5000/get-title', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.bookId,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ title: data })
+      })
+      .catch(error => console.error(error))
+  }
+
   componentDidMount() {
     this.getGenres()
+    this.getTitle()
   }
 
   render() {
     return (
       <div>
-        <h2>Add book info!</h2>
+        <h2>Add info for {this.state.title}</h2>
         <div>
           <form onSubmit={this.handleSubmitGenres}>
             <label>
