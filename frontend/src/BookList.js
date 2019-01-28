@@ -6,8 +6,10 @@ class BookList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      userId: '',
       books: [],
     }
+    this.getUserId = this.getUserId.bind(this)
     this.getBooks = this.getBooks.bind(this)
     this.onBookDelete = this.onBookDelete.bind(this)
     this.onBookAdd = this.onBookAdd.bind(this)
@@ -36,6 +38,24 @@ class BookList extends React.Component {
     this.setState({ books: updatedBooks })
   }
 
+  getUserId() {
+    fetch('http://localhost:5000/get-userid', {
+      method: 'GET',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ userId: data })
+      })
+      .catch(error => console.error(error))
+  }
+
   getBooks() {
     fetch('http://localhost:5000/get-your-books', {
       method: 'GET',
@@ -55,12 +75,13 @@ class BookList extends React.Component {
   }
   componentDidMount() {
     this.getBooks()
+    this.getUserId()
   }
 
   render() {
     return (
       <div>
-        <h2>Your Books</h2>
+        <h2>Your Shelf</h2>
         <div>
           {this.state.books.map(book => {
             return (
@@ -69,6 +90,7 @@ class BookList extends React.Component {
                 title={book.title}
                 author={book.author}
                 bookId={book.id}
+                userId={this.state.userId}
                 onBookDelete={this.onBookDelete}
                 onBookUpdate={this.onBookUpdate}
               />

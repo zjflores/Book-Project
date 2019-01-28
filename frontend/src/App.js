@@ -11,6 +11,7 @@ import Register from './Register'
 import Logout from './Logout'
 import UserList from './UserList'
 import UserBooks from './UserBooks'
+import BookForms from './BookForms'
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +54,8 @@ class App extends React.Component {
             <Route path="/login" component={this.renderLogin} />
             <Route path="/books" component={BookList} />
             <Route path="/logout" component={this.renderLogout} />
-            <Route path="/book/:bookId" component={BookInfo} />
+            <Route path="/user/:id/book/:bookId" component={BookInfo} />
+            <Route path="/user/:id/book/:bookId/update" component={BookForms} />
             <Route path="/users" component={UserList} />
             <Route path="/user/:id/books" component={UserBooks} />
           </div>

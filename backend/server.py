@@ -1,5 +1,6 @@
 
 from flask import (Flask, jsonify, redirect, request, session)
+from flask_api import status
 # from Flask-DebugToolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
@@ -64,12 +65,11 @@ def login():
         if q.count() > 0:
             user = q.one()
             session['user_id'] = user.id
-            print(session)
-            return jsonify("Successfully logged in for %s" % user.id)
+            return jsonify("Login successful"), status.HTTP_202_ACCEPTED
         else:
-            return jsonify("Invalid credentials")
+            return jsonify("Invalid credentials"), status.HTTP_401_UNAUTHORIZED
     else:
-        return jsonify("User does not exist")
+        return jsonify("User does not exist"), status.HTTP_401_UNAUTHORIZED
 
 
 @app.route('/logout', methods=['POST'])
@@ -84,6 +84,33 @@ def logout():
     return jsonify("User has been logged out")
 
 
+@app.route('/get-title', methods=['POST'])
+@cross_origin()
+def get_title():
+    data = request.get_json()
+    print(data)
+
+    book = Book.query.get(data["id"])
+    return jsonify(book.title)
+
+
+@app.route('/get-name', methods=['POST'])
+@cross_origin()
+def get_username():
+    data = request.get_json()
+    print(data)
+
+    user = User.query.get(data["id"])
+    return jsonify(user.name)
+
+
+@app.route('/get-userid', methods=['GET'])
+@cross_origin()
+def get_userid():
+    print(session)
+    return jsonify(session['user_id'])
+
+
 @app.route('/get-genres', methods=['GET'])
 @cross_origin()
 def get_genres():
@@ -95,6 +122,26 @@ def get_genres():
         genres.append({'text': i.genre, 'value': i.id})
 
     return jsonify(genres)
+
+
+@app.route('/get-bookgenres', methods=['POST'])
+@cross_origin()
+def get_bookgenres():
+    data = request.get_json()
+    print(data)
+
+    genres = []
+    q = BookGenre.query.filter(BookGenre.book_id == data['id'])
+
+    if q.count() > 0:
+        for i in q.all():
+            genre = Genre.query.get(i.genre_id)
+            genres.append({'genre': genre.genre})
+        print(genres)
+        return jsonify(genres)
+
+    else:
+        return jsonify("No genres assigned")
 
 
 @app.route('/set-genres', methods=['POST'])
@@ -292,6 +339,43 @@ def set_end_date():
     book.end_date = data["end"]
     db.session.commit()
     return jsonify("End date added")
+
+
+@app.route('/get-start-date', methods=['POST'])
+@cross_origin()
+def get_start_date():
+    data = request.get_json()
+    print(data)
+
+    book_user = BookUser.query.filter((BookUser.book_id==data['book_id']) & (BookUser.user_id==data['id'])).one()
+    return jsonify(book_user.end_date)
+
+
+@app.route('/get-end-date', methods=['POST'])
+@cross_origin()
+def get_end_date():
+    data = request.get_json()
+    print(data)
+    book_user = BookUser.query.filter((BookUser.book_id==data['book_id']) & (BookUser.user_id==data['id'])).one()
+    return jsonify(book_user.end_date)
+
+
+@app.route('/get-reader', methods=['POST'])
+@cross_origin()
+def get_readers():
+    data = request.get_json()
+    print(data)
+
+    readers = []
+
+    q = BookUser.query.filter(BookUser.book_id==data['book_id'])
+
+    if q.count() > 1:
+        for i in q:
+            if i.id != data['id']:
+                user = User.query.get(i.id)
+                reader = {"name": user.name, "id": user.id}
+                readers.append(reader)
 
 
 if __name__ == "__main__":

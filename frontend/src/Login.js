@@ -37,10 +37,17 @@ class Login extends Component {
         password: this.state.password,
       }),
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 202) {
+          console.log('SUCCESSS')
+          this.props.onLogin()
+          return response.json()
+        } else if (response.status === 401) {
+          console.log('uh-oh')
+        }
+      })
       .then(data => {
         console.log(data)
-        this.props.onLogin()
       })
       .catch(error => console.error(error))
   }

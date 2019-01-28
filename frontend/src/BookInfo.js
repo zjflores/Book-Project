@@ -1,76 +1,26 @@
 import React, { Component } from 'react'
-import FilteredMultiSelect from 'react-filtered-multiselect'
+import moment from 'moment'
 
 class BookInfo extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props.match.params.bookId)
     this.state = {
+      title: '',
+      name: '',
       genres: [],
-      selectedGenres: [],
       startDate: '',
       endDate: '',
+      authorized: false,
+      readers: [],
     }
-    this.getGenres = this.getGenres.bind(this)
-    this.handleSelect = this.handleSelect.bind(this)
-    this.handleDeselect = this.handleDeselect.bind(this)
-    this.handleStartDateChange = this.handleStartDateChange.bind(this)
-    this.handleEndDateChange = this.handleEndDateChange.bind(this)
-    this.handleSubmitGenres = this.handleSubmitGenres.bind(this)
-    this.handleSubmitStartDate = this.handleSubmitStartDate.bind(this)
-    this.handleSubmitEndDate = this.handleSubmitEndDate.bind(this)
+    this.getTitle = this.getTitle.bind(this)
+    this.getName = this.getName.bind(this)
+    this.getBookGenres = this.getBookGenres.bind(this)
+    this.getStartDate = this.getStartDate.bind(this)
+    this.getEndDate = this.getEndDate.bind(this)
   }
-  handleSelect(addGenres) {
-    const newSelectedGenres = this.state.selectedGenres.concat(addGenres)
-    this.setState({ selectedGenres: newSelectedGenres })
-  }
-
-  handleDeselect(deselectedGenres) {
-    // Object.assign({}, this.state.selectedGenres)
-    const genresSelected = this.state.selectedGenres.filter(genre => {
-      for (let i = 0; i < deselectedGenres.length; i++) {
-        if (deselectedGenres[i].text === genre.text) {
-          return false
-        }
-      }
-
-      return true
-    })
-    this.setState({ selectedGenres: genresSelected })
-  }
-
-  handleStartDateChange(event) {
-    this.setState({ startDate: event.target.value })
-  }
-
-  handleEndDateChange(event) {
-    this.setState({ endDate: event.target.value })
-  }
-
-  handleSubmitStartDate(event) {
-    event.preventDefault()
-    fetch('http://localhost:5000/book/set-start-date', {
-      method: 'POST',
-      mode: 'cors', // no-cors, cors, *same-origin
-      headers: {
-        'Content-Type': 'application/json',
-        // "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify({
-        id: this.props.match.params.bookId,
-        start: this.state.startDate,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-      })
-      .catch(error => console.error(error))
-  }
-
-  handleSubmitEndDate(event) {
-    event.preventDefault()
-    fetch('http://localhost:5000/book/set-end-date', {
+  getTitle() {
+    fetch('http://localhost:5000/get-title', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -80,19 +30,39 @@ class BookInfo extends Component {
       },
       body: JSON.stringify({
         id: this.props.match.params.bookId,
-        end: this.state.endDate,
       }),
     })
       .then(response => response.json())
       .then(data => {
         console.log(data)
+        this.setState({ title: data })
       })
       .catch(error => console.error(error))
   }
 
-  handleSubmitGenres(event) {
-    event.preventDefault()
-    fetch('http://localhost:5000/set-genres', {
+  getName() {
+    fetch('http://localhost:5000/get-name', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.id,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.setState({ name: data })
+      })
+      .catch(error => console.error(error))
+  }
+
+  getBookGenres() {
+    fetch('http://localhost:5000/get-bookgenres', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -102,25 +72,7 @@ class BookInfo extends Component {
       },
       body: JSON.stringify({
         id: this.props.match.params.bookId,
-        genres: this.state.selectedGenres,
       }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-      })
-      .catch(error => console.error(error))
-  }
-
-  getGenres() {
-    fetch('http://localhost:5000/get-genres', {
-      method: 'GET',
-      mode: 'cors', // no-cors, cors, *same-origin
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        // "Content-Type": "application/x-www-form-urlencoded",
-      },
     })
       .then(response => response.json())
       .then(data => {
@@ -129,65 +81,73 @@ class BookInfo extends Component {
       })
       .catch(error => console.error(error))
   }
-
-  componentDidMount() {
-    this.getGenres()
+  getStartDate() {
+    fetch('http://localhost:5000/get-start-date', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.id,
+        book_id: this.props.match.params.bookId,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        data = moment(data).format('MMMM Do gggg')
+        this.setState({ startDate: data })
+      })
+      .catch(error => console.error(error))
+  }
+  getEndDate() {
+    fetch('http://localhost:5000/get-end-date', {
+      method: 'POST',
+      mode: 'cors', // no-cors, cors, *same-origin
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        // "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: JSON.stringify({
+        id: this.props.match.params.id,
+        book_id: this.props.match.params.bookId,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        data = moment(data).format('MMMM Do gggg')
+        this.setState({ endDate: data })
+      })
+      .catch(error => console.error(error))
   }
 
+  componentDidMount() {
+    this.getBookGenres()
+    this.getTitle()
+    this.getName()
+    this.getStartDate()
+    this.getEndDate()
+  }
   render() {
     return (
       <div>
-        <h2>Add book info!</h2>
+        <h1>{this.state.title}</h1>
+        <h2>Genres</h2>
         <div>
-          <form onSubmit={this.handleSubmitGenres}>
-            <label>
-              Select Book Genre(s)
-              <FilteredMultiSelect
-                buttonText="Add"
-                onChange={this.handleSelect}
-                options={this.state.genres}
-                selectedOptions={this.selectedGenres}
-              />
-            </label>
-            <label>
-              <FilteredMultiSelect
-                buttonText="Remove"
-                onChange={this.handleDeselect}
-                options={this.state.selectedGenres}
-                showFilter={false}
-              />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+          {this.state.genres.map(genre => {
+            return <div key={genre.genre}>{genre.genre}</div>
+          })}
         </div>
-        <br />
-        <div>
-          <form onSubmit={this.handleSubmitStartDate}>
-            <label>
-              Start date:
-              <input
-                type="date"
-                name="start"
-                value={this.state.startDate}
-                onChange={this.handleStartDateChange}
-              />
-            </label>
-            <input className="btn" type="submit" value="Submit" />
-          </form>
-          <br />
-          <form onSubmit={this.handleSubmitEndDate}>
-            <label>
-              End date:
-              <input
-                type="date"
-                name="end"
-                value={this.state.endDate}
-                onChange={this.handleEndDateChange}
-              />
-            </label>
-            <input className="btn" type="submit" value="Submit" />
-          </form>
-        </div>
+        <h2>{this.state.name} started this book on: </h2>
+        {this.state.startDate}
+        <h2>{this.state.name} finished this book on:</h2>
+        {this.state.endDate}
+        <h2>Other User's Reading This Title</h2>
       </div>
     )
   }

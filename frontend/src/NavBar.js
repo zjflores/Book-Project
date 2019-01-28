@@ -20,7 +20,7 @@ class NavBar extends Component {
               <NavItem>Home</NavItem>
             </LinkContainer>
             <LinkContainer to="/books">
-              <NavItem>Books</NavItem>
+              <NavItem>Your Library</NavItem>
             </LinkContainer>
             <LinkContainer to="/users">
               <NavItem>Users</NavItem>

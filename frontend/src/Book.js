@@ -88,7 +88,7 @@ class Book extends Component {
       return (
         <div>
           <div>
-            <NavLink to={`/book/${this.props.bookId}`}>
+            <NavLink to={`user/${this.props.userId}/book/${this.props.bookId}`}>
               {this.props.title} - {this.props.author}
             </NavLink>
             <TrashButton
