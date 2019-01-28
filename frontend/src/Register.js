@@ -6,18 +6,24 @@ class Register extends Component {
     super(props)
     this.state = {
       isLoggedIn: this.props.isLoggedIn,
-      name: '',
+      fname: '',
+      lname: '',
       email: '',
       password: '',
     }
-    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleFnameChange = this.handleFnameChange.bind(this)
+    this.handleLnameChange = this.handleLnameChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNameChange(event) {
-    this.setState({ name: event.target.value })
+  handleFnameChange(event) {
+    this.setState({ fname: event.target.value })
+  }
+
+  handleLnameChange(event) {
+    this.setState({ lname: event.target.value })
   }
 
   handleEmailChange(event) {
@@ -39,7 +45,8 @@ class Register extends Component {
         // "Content-Type": "application/x-www-form-urlencoded",
       },
       body: JSON.stringify({
-        name: this.state.name,
+        fname: this.state.fname,
+        lname: this.state.lname,
         email: this.state.email,
         password: this.state.password,
       }),
@@ -60,12 +67,22 @@ class Register extends Component {
           <h2>Register</h2>
           <form onSubmit={this.handleSubmit}>
             <label>
-              Name:
+              First Name:
               <input
                 type="text"
-                value={this.state.name}
+                value={this.state.fname}
                 required
-                onChange={this.handleNameChange}
+                onChange={this.handleFnameChange}
+              />
+            </label>
+            <br />
+            <label>
+              Last Name:
+              <input
+                type="text"
+                value={this.state.lname}
+                required
+                onChange={this.handleLnameChange}
               />
             </label>
             <br />

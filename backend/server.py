@@ -43,7 +43,7 @@ def register():
         return jsonify("User already exists")
     else:
         new_user = User(
-            name=data["name"], email=data["email"], password=data["password"])
+            fname=data["fname"], lname=data["lname"], email=data["email"], password=data["password"])
         session['user_id'] = new_user.id
         db.session.add(new_user)
         db.session.commit()
@@ -101,7 +101,7 @@ def get_username():
     print(data)
 
     user = User.query.get(data["id"])
-    return jsonify(user.name)
+    return jsonify(user.fname)
 
 
 @app.route('/get-userid', methods=['GET'])
@@ -172,7 +172,7 @@ def get_users():
     print(q)
     for user in q:
         if user.id != session['user_id']:
-            users.append({'name': user.name, 'id': user.id})
+            users.append({'name': user.fname, 'id': user.id})
     return jsonify(users)
 
 
@@ -374,7 +374,7 @@ def get_readers():
         for i in q:
             if i.id != data['id']:
                 user = User.query.get(i.id)
-                reader = {"name": user.name, "id": user.id}
+                reader = {"name": user.fname, "id": user.id}
                 readers.append(reader)
 
 
