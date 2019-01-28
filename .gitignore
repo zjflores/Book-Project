@@ -46,3 +46,4 @@ yarn-error.log*
 /.changelog
 .npm/
 MultiSelect.js
+*prettierrc.json
