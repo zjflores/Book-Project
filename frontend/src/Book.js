@@ -99,7 +99,7 @@ class Book extends Component {
               className="updateButton btn"
               onClick={this.handleUpdateBook}
             >
-              Update
+              <i class="fas fa-pencil-alt" />
             </button>
           </div>
         </div>

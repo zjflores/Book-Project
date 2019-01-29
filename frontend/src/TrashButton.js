@@ -31,7 +31,7 @@ class TrashButton extends Component {
   render() {
     return (
       <button className="trashButton btn" onClick={this.handleDeleteBook}>
-        Delete
+        <span class="fas fa-trash-alt" />
       </button>
     )
   }
