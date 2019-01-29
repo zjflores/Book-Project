@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Nav, Navbar, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import './NavBar.css'
 
 class NavBar extends Component {
   constructor(props) {
@@ -9,33 +10,39 @@ class NavBar extends Component {
   }
   render() {
     return (
-      <Navbar fluid collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand />
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav pullRight>
+      <Navbar>
+        <Nav className="mynav">
+          <NavItem>
             <LinkContainer to="/">
-              <NavItem>Home</NavItem>
+              <span>Home</span>
             </LinkContainer>
+          </NavItem>
+          <NavItem>
             <LinkContainer to="/books">
-              <NavItem>Your Library</NavItem>
+              <span>Your Library</span>
             </LinkContainer>
+          </NavItem>
+          <NavItem>
             <LinkContainer to="/users">
-              <NavItem>Users</NavItem>
+              <span>Users</span>
             </LinkContainer>
+          </NavItem>
+          <NavItem>
             <LinkContainer to="/register">
-              <NavItem>Register</NavItem>
+              <span>Register</span>
             </LinkContainer>
+          </NavItem>
+          <NavItem>
             <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
+              <span>Login</span>
             </LinkContainer>
+          </NavItem>
+          <NavItem>
             <LinkContainer to="/logout">
-              <NavItem>Logout</NavItem>
+              <span>Logout</span>
             </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
+          </NavItem>
+        </Nav>
       </Navbar>
     )
   }

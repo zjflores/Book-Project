@@ -383,12 +383,7 @@ def get_readers():
 @cross_origin()
 def get_authorization():
     data = request.get_json()
-    print()
-    print()
     print(data)
-    print(session['user_id'])
-    print()
-    print()
 
     if int(data['id']) == session['user_id']:
         return jsonify("woo"), status.HTTP_200_OK

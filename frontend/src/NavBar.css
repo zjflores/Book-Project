@@ -1,0 +1,10 @@
+.navbar-nav {
+  flex-direction: row;
+}
+.mynav > li {
+  padding: 5px;
+}
+.mynav li a {
+  color: #1c330a;
+  font-weight: 600;
+}

@@ -1,10 +1,14 @@
-.btn{
-	padding: 2px 10px
+.btn {
+  padding: 2px 10px;
 }
 body {
-	background-image: url(https://lh3.googleusercontent.com/_tcY7QLx6X_8/UY1_bXEw_dI/AAAAAAAACGI/cED5J49RVlc/w500-h125-p/03-chevron-hand.jpg);
-	background-color: #2f93b5;
-  }
+  background-image: url(https://lh3.googleusercontent.com/_tcY7QLx6X_8/UY1_bXEw_dI/AAAAAAAACGI/cED5J49RVlc/w500-h125-p/03-chevron-hand.jpg);
+  background-color: #2f93b5;
+}
 /* div {
 	background-color: #2f93b5
 } */
+
+a {
+  color: black;
+}
