@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
+import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 
 class Login extends Component {
   constructor(props) {
@@ -56,32 +57,38 @@ class Login extends Component {
       return <Redirect push to="/books" />
     } else {
       return (
-        <div>
+        <Container>
           <h2>Login</h2>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Email:
-              <input
-                type="email"
-                value={this.state.email}
-                required
-                onChange={this.handleEmailChange}
-              />
-            </label>
-            <br />
-            <label>
-              Password:
-              <input
-                type="password"
-                value={this.state.password}
-                required
-                onChange={this.handlePasswordChange}
-              />
-            </label>
-            <br />
-            <input type="submit" className="btn" value="Submit" />
-          </form>
-        </div>
+          <Form onSubmit={this.handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group controlId="forEmail">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={this.state.email}
+                    required
+                    onChange={this.handleEmailChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="password">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={this.state.password}
+                    required
+                    onChange={this.handlePasswordChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Button variant="primary" type="submit">
+              Sign In
+            </Button>
+          </Form>
+        </Container>
       )
     }
   }

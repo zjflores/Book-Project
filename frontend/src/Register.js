@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
+import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 
 class Register extends Component {
   constructor(props) {
@@ -63,52 +64,62 @@ class Register extends Component {
       return <Redirect push to="/books" />
     } else {
       return (
-        <div>
+        <Container>
           <h2>Register</h2>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              First Name:
-              <input
-                type="text"
-                value={this.state.fname}
-                required
-                onChange={this.handleFnameChange}
-              />
-            </label>
-            <br />
-            <label>
-              Last Name:
-              <input
-                type="text"
-                value={this.state.lname}
-                required
-                onChange={this.handleLnameChange}
-              />
-            </label>
-            <br />
-            <label>
-              Email:
-              <input
-                type="email"
-                value={this.state.email}
-                required
-                onChange={this.handleEmailChange}
-              />
-            </label>
-            <br />
-            <label>
-              Password:
-              <input
-                type="password"
-                value={this.state.password}
-                required
-                onChange={this.handlePasswordChange}
-              />
-            </label>
-            <br />
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+          <Form onSubmit={this.handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group controlId="formFname">
+                  <Form.Label>First Name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.fname}
+                    required
+                    onChange={this.handleFnameChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="formLname">
+                  <Form.Label>Last Name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={this.state.lname}
+                    required
+                    onChange={this.handleLnameChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Form.Group controlId="forEmail">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={this.state.email}
+                    required
+                    onChange={this.handleEmailChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="password">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={this.state.password}
+                    required
+                    onChange={this.handlePasswordChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Container>
       )
     }
   }

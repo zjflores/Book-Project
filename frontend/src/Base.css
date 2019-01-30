@@ -30,7 +30,18 @@ a {
   padding: 12px, 16px;
   margin: 3px;
 }
+h2 {
+  text-align: center;
+}
+.Title {
+  color: #2f93b5;
+}
 
+.Home {
+  /* background: url(https://assets.atlasobscura.com/article_images/54798/image.jpg);
+	background-size: cover; */
+  background-color: #94c9a9;
+}
 /* colors {
 	color: #1d3356
 } */

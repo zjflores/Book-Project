@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
+import './Base.css'
 import { Container } from 'react-bootstrap'
 
 class Home extends Component {
@@ -20,20 +21,25 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="Home container-fluid">
+      <Container className="Home container-fluid">
         <header>
           <NavBar isLoggedIn={this.props.isLoggedIn} />
-          <div>
-            <img
+          <div className="Cover">
+            <h1 className="Title">Build Your Own Book Club</h1>
+            {/* <img
               src="https://assets.atlasobscura.com/article_images/54798/image.jpg"
               className="Library"
               alt="Library"
-            />
-            {/* <img src="Users/zjflores/Desktop/33_literature.png" alt="books" /> */}
+            /> */}
+            {/* <img
+              src="https://lh5.googleusercontent.com/proxy/5nNPUjX8L-Nn4fWJ4tPM5ES2Gk5R_YpD6oh0A5IL1CklpM9ZzOmY3e9BHWaE5NtpbL00UxSsuApQ5J_skQ6nHrHw6WpGnr9V4JAPmn1PzvxW1OUiRR8P_PNjGon7taEArOg0Vh45yAmwEUeCrA3bEgOKGmtkeopEdng=w5000-h5000"
+              className="book-img"
+              alt="books"
+            /> */}
+            <p>{this.state.quote}</p>
           </div>
-          <p>{this.state.quote}</p>
         </header>
-      </div>
+      </Container>
     )
   }
 }

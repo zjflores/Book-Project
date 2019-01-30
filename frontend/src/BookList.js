@@ -83,7 +83,7 @@ class BookList extends React.Component {
     return (
       <Container>
         <Row>
-          <Col sm={7}>
+          <Col sm={8}>
             <h2>Your Shelf</h2>
             {this.state.books.map(book => {
               return (
@@ -99,7 +99,7 @@ class BookList extends React.Component {
               )
             })}
           </Col>
-          <Col sm={5}>
+          <Col sm={4}>
             <AddBook onBookAdd={this.onBookAdd} />
           </Col>
         </Row>
