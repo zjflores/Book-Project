@@ -7,6 +7,7 @@
 }
 .navlink {
   padding: 10px;
+  cursor: pointer;
 }
 .mynav li a {
   color: #1c330a;

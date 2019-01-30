@@ -24,6 +24,7 @@ class App extends React.Component {
     this.renderLogin = this.renderLogin.bind(this)
     this.renderLogout = this.renderLogout.bind(this)
     this.renderRegister = this.renderRegister.bind(this)
+    this.renderHome = this.renderHome.bind(this)
   }
   onLogin() {
     this.setState({ isLoggedIn: true })
@@ -44,12 +45,15 @@ class App extends React.Component {
       <Register onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
     )
   }
+  renderHome() {
+    return <Home isLoggedIn={this.state.isLoggedIn} />
+  }
   render() {
     return (
       <Router>
         <div className="App">
           <div className="App container">
-            <Route path="/" component={Home} />
+            <Route path="/" component={this.renderHome} />
             <Route path="/register" component={this.renderRegister} />
             <Route path="/login" component={this.renderLogin} />
             <Route path="/books" component={BookList} />

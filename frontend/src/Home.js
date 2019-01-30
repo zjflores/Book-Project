@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
+import { Container } from 'react-bootstrap'
 
 class Home extends Component {
   constructor(props) {
@@ -19,14 +20,16 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="Home">
+      <div className="Home container-fluid">
         <header>
-          <NavBar />
-          <img
-            src="https://assets.atlasobscura.com/article_images/54798/image.jpg"
-            className="Library"
-            alt="Library"
-          />
+          <NavBar isLoggedIn={this.props.isLoggedIn} />
+          <div>
+            <img
+              src="https://assets.atlasobscura.com/article_images/54798/image.jpg"
+              className="Library"
+              alt="Library"
+            />
+          </div>
           <p>{this.state.quote}</p>
         </header>
       </div>

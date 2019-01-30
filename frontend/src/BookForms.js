@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FilteredMultiSelect from 'react-filtered-multiselect'
+import { Col, Row } from 'react-bootstrap'
 
 class BookForms extends Component {
   constructor(props) {
@@ -185,33 +186,36 @@ class BookForms extends Component {
           </form>
         </div>
         <br />
-        <div>
-          <form onSubmit={this.handleSubmitStartDate}>
-            <label>
-              Start date:
-              <input
-                type="date"
-                name="start"
-                value={this.state.startDate}
-                onChange={this.handleStartDateChange}
-              />
-            </label>
-            <input className="btn" type="submit" value="Submit" />
-          </form>
-          <br />
-          <form onSubmit={this.handleSubmitEndDate}>
-            <label>
-              End date:
-              <input
-                type="date"
-                name="end"
-                value={this.state.endDate}
-                onChange={this.handleEndDateChange}
-              />
-            </label>
-            <input className="btn" type="submit" value="Submit" />
-          </form>
-        </div>
+        <Row>
+          <Col>
+            <form onSubmit={this.handleSubmitStartDate}>
+              <label>
+                Start date:
+                <input
+                  type="date"
+                  name="start"
+                  value={this.state.startDate}
+                  onChange={this.handleStartDateChange}
+                />
+              </label>
+              <input className="btn" type="submit" value="Submit" />
+            </form>
+          </Col>
+          <Col>
+            <form onSubmit={this.handleSubmitEndDate}>
+              <label>
+                End date:
+                <input
+                  type="date"
+                  name="end"
+                  value={this.state.endDate}
+                  onChange={this.handleEndDateChange}
+                />
+              </label>
+              <input className="btn" type="submit" value="Submit" />
+            </form>
+          </Col>
+        </Row>
       </div>
     )
   }

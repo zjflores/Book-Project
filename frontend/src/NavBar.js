@@ -9,42 +9,56 @@ class NavBar extends Component {
     this.state = {}
   }
   render() {
-    return (
-      <Navbar>
-        <Nav className="mynav">
-          <NavItem>
-            <LinkContainer to="/">
-              <span className="navlink">Home</span>
-            </LinkContainer>
-          </NavItem>
-          <NavItem>
-            <LinkContainer to="/books">
-              <span className="navlink">Your Library</span>
-            </LinkContainer>
-          </NavItem>
-          <NavItem>
-            <LinkContainer to="/users">
-              <span className="navlink">Users</span>
-            </LinkContainer>
-          </NavItem>
-          <NavItem>
-            <LinkContainer to="/register">
-              <span className="navlink">Register</span>
-            </LinkContainer>
-          </NavItem>
-          <NavItem>
-            <LinkContainer to="/login">
-              <span className="navlink">Login</span>
-            </LinkContainer>
-          </NavItem>
-          <NavItem>
-            <LinkContainer to="/logout">
-              <span className="navlink">Logout</span>
-            </LinkContainer>
-          </NavItem>
-        </Nav>
-      </Navbar>
-    )
+    if (this.props.isLoggedIn) {
+      return (
+        <Navbar>
+          <Nav className="mynav">
+            <NavItem>
+              <LinkContainer to="/">
+                <span className="navlink">Home</span>
+              </LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/books">
+                <span className="navlink">Your Library</span>
+              </LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/users">
+                <span className="navlink">Users</span>
+              </LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/logout">
+                <span className="navlink">Logout</span>
+              </LinkContainer>
+            </NavItem>
+          </Nav>
+        </Navbar>
+      )
+    } else {
+      return (
+        <Navbar>
+          <Nav className="mynav">
+            <NavItem>
+              <LinkContainer to="/">
+                <span className="navlink">Home</span>
+              </LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/register">
+                <span className="navlink">Register</span>
+              </LinkContainer>
+            </NavItem>
+            <NavItem>
+              <LinkContainer to="/login">
+                <span className="navlink">Login</span>
+              </LinkContainer>
+            </NavItem>
+          </Nav>
+        </Navbar>
+      )
+    }
   }
 }
 
