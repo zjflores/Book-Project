@@ -10,17 +10,27 @@ body {
 } */
 
 a {
-  color: black;
+  color: #1d3356;
+  font-weight: 500;
 }
 .trashButton {
   background-color: #fe5f55;
   border: none;
   cursor: pointer;
   padding: 12px, 16px;
+  margin-top: 3px;
+  margin-right: 3px;
+  margin-left: 6px;
+  margin-bottom: 3px;
 }
 .updateButton {
   background-color: #94c9a9;
   border: none;
   cursor: pointer;
   padding: 12px, 16px;
+  margin: 3px;
 }
+
+/* colors {
+	color: #1d3356
+} */

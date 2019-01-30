@@ -20,17 +20,15 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <div>
-          <header className="Home">
-            <NavBar />
-            <img
-              src="https://assets.atlasobscura.com/article_images/54798/image.jpg"
-              className="Library"
-              alt="Library"
-            />
-            <p>{this.state.quote}</p>
-          </header>
-        </div>
+        <header>
+          <NavBar />
+          <img
+            src="https://assets.atlasobscura.com/article_images/54798/image.jpg"
+            className="Library"
+            alt="Library"
+          />
+          <p>{this.state.quote}</p>
+        </header>
       </div>
     )
   }

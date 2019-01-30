@@ -1,8 +1,12 @@
 .navbar-nav {
   flex-direction: row;
+  /* background-color: #777da7; */
 }
 .mynav > li {
-  padding: 5px;
+  padding: 15px;
+}
+.navlink {
+  padding: 10px;
 }
 .mynav li a {
   color: #1c330a;

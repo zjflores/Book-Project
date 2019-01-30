@@ -14,32 +14,32 @@ class NavBar extends Component {
         <Nav className="mynav">
           <NavItem>
             <LinkContainer to="/">
-              <span>Home</span>
+              <span className="navlink">Home</span>
             </LinkContainer>
           </NavItem>
           <NavItem>
             <LinkContainer to="/books">
-              <span>Your Library</span>
+              <span className="navlink">Your Library</span>
             </LinkContainer>
           </NavItem>
           <NavItem>
             <LinkContainer to="/users">
-              <span>Users</span>
+              <span className="navlink">Users</span>
             </LinkContainer>
           </NavItem>
           <NavItem>
             <LinkContainer to="/register">
-              <span>Register</span>
+              <span className="navlink">Register</span>
             </LinkContainer>
           </NavItem>
           <NavItem>
             <LinkContainer to="/login">
-              <span>Login</span>
+              <span className="navlink">Login</span>
             </LinkContainer>
           </NavItem>
           <NavItem>
             <LinkContainer to="/logout">
-              <span>Logout</span>
+              <span className="navlink">Logout</span>
             </LinkContainer>
           </NavItem>
         </Nav>
