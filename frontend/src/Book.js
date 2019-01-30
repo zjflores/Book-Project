@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TrashButton from './TrashButton'
 import './Book.css'
 import { NavLink } from 'react-router-dom'
-import { Col, Row, Container } from 'react-bootstrap'
+import { Row, Container } from 'react-bootstrap'
 
 class Book extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class Book extends Component {
     this.handleAuthorChange = this.handleAuthorChange.bind(this)
     this.handleUpdateBook = this.handleUpdateBook.bind(this)
     this.handleSaveUpdate = this.handleSaveUpdate.bind(this)
+    this.handleCancel = this.handleCancel.bind(this)
   }
 
   handleTitleChange(event) {
@@ -31,6 +32,11 @@ class Book extends Component {
   handleUpdateBook(event) {
     event.preventDefault()
     this.setState({ updateClicked: true })
+  }
+
+  handleCancel(event) {
+    event.preventDefault()
+    this.setState({ updateClicked: false })
   }
 
   handleSaveUpdate(event) {
@@ -83,6 +89,7 @@ class Book extends Component {
             </label>
           </form>
           <button onClick={this.handleSaveUpdate}>Save</button>
+          <button onClick={this.handleCancel}>Cancel</button>
         </div>
       )
     } else {
