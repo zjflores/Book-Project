@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FilteredMultiSelect from 'react-filtered-multiselect'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Container } from 'react-bootstrap'
 
 class BookForms extends Component {
   constructor(props) {
@@ -161,7 +161,7 @@ class BookForms extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <h2>Add info for {this.state.title}</h2>
         <div>
           <form onSubmit={this.handleSubmitGenres}>
@@ -216,7 +216,7 @@ class BookForms extends Component {
             </form>
           </Col>
         </Row>
-      </div>
+      </Container>
     )
   }
 }

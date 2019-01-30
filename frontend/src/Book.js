@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TrashButton from './TrashButton'
 import './Book.css'
 import { NavLink } from 'react-router-dom'
+import { Col, Row, Container } from 'react-bootstrap'
 
 class Book extends Component {
   constructor(props) {
@@ -86,8 +87,8 @@ class Book extends Component {
       )
     } else {
       return (
-        <div>
-          <div>
+        <Container>
+          <Row>
             <NavLink to={`user/${this.props.userId}/book/${this.props.bookId}`}>
               {this.props.title} - {this.props.author}
             </NavLink>
@@ -101,8 +102,8 @@ class Book extends Component {
             >
               <i className="fas fa-pencil-alt" />
             </button>
-          </div>
-        </div>
+          </Row>
+        </Container>
       )
     }
   }

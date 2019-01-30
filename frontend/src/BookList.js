@@ -1,6 +1,7 @@
 import React from 'react'
 import AddBook from './AddBook'
 import Book from './Book'
+import { Col, Row, Container } from 'react-bootstrap'
 
 class BookList extends React.Component {
   constructor(props) {
@@ -80,27 +81,29 @@ class BookList extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Your Shelf</h2>
-        <div>
-          {this.state.books.map(book => {
-            return (
-              <Book
-                key={book.id}
-                title={book.title}
-                author={book.author}
-                bookId={book.id}
-                userId={this.state.userId}
-                onBookDelete={this.onBookDelete}
-                onBookUpdate={this.onBookUpdate}
-              />
-            )
-          })}
-        </div>
-        <div>
-          <AddBook onBookAdd={this.onBookAdd} />
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col sm={7}>
+            <h2>Your Shelf</h2>
+            {this.state.books.map(book => {
+              return (
+                <Book
+                  key={book.id}
+                  title={book.title}
+                  author={book.author}
+                  bookId={book.id}
+                  userId={this.state.userId}
+                  onBookDelete={this.onBookDelete}
+                  onBookUpdate={this.onBookUpdate}
+                />
+              )
+            })}
+          </Col>
+          <Col sm={5}>
+            <AddBook onBookAdd={this.onBookAdd} />
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

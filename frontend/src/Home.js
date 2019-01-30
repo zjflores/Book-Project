@@ -29,6 +29,7 @@ class Home extends Component {
               className="Library"
               alt="Library"
             />
+            {/* <img src="Users/zjflores/Desktop/33_literature.png" alt="books" /> */}
           </div>
           <p>{this.state.quote}</p>
         </header>
