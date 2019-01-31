@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button } from 'react-bootstrap'
 
 class TrashButton extends Component {
   constructor(props) {
@@ -30,9 +31,9 @@ class TrashButton extends Component {
 
   render() {
     return (
-      <button className="trashButton btn" onClick={this.handleDeleteBook}>
+      <Button className="trashButton btn" onClick={this.handleDeleteBook}>
         <span className="fas fa-trash-alt" />
-      </button>
+      </Button>
     )
   }
 }

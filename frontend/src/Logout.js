@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router'
+import { Button } from 'react-bootstrap'
 
 class Logout extends Component {
   constructor(props) {
     super(props)
     this.state = {
-			isLoggedIn: this.props.isLoggedIn,
+      isLoggedIn: this.props.isLoggedIn,
       email: this.props.email,
       password: this.props.password,
     }
@@ -28,14 +29,14 @@ class Logout extends Component {
     })
       .then(response => response.json())
       .then(data => {
-				console.log(data)
-				this.props.onLogout()
+        console.log(data)
+        this.props.onLogout()
       })
       .catch(error => console.error(error))
   }
   render() {
     if (this.props.isLoggedIn) {
-      return <button onClick={this.handleLogout}>Logout</button>
+      return <Button onClick={this.handleLogout}>Logout</Button>
     } else {
       return <Redirect push to="/" />
     }

@@ -2,46 +2,103 @@
   padding: 2px 10px;
 }
 body {
-  background-image: url(https://lh3.googleusercontent.com/_tcY7QLx6X_8/UY1_bXEw_dI/AAAAAAAACGI/cED5J49RVlc/w500-h125-p/03-chevron-hand.jpg);
-  background-color: #2f93b5;
+  /* background-image: url(https://lh3.googleusercontent.com/_tcY7QLx6X_8/UY1_bXEw_dI/AAAAAAAACGI/cED5J49RVlc/w500-h125-p/03-chevron-hand.jpg); */
+  background-color: #084c61;
 }
-/* div {
-	background-color: #2f93b5
-} */
 
 a {
-  color: #1d3356;
-  font-weight: 500;
+  color: #dfdce3;
+  font-weight: 600;
 }
 .trashButton {
-  background-color: #fe5f55;
-  border: none;
+  background-color: #db3a34;
+  -webkit-text-fill-color: #323031;
+  border: #323031;
+  padding: 0px 5px;
   cursor: pointer;
-  padding: 12px, 16px;
   margin-top: 3px;
-  margin-right: 3px;
-  margin-left: 6px;
+  margin-right: 6px;
+  margin-left: 3px;
   margin-bottom: 3px;
 }
 .updateButton {
-  background-color: #94c9a9;
-  border: none;
+  background-color: #177e89;
+  -webkit-text-fill-color: #ffc857;
+  padding: 0px 5px;
+  border: #323031;
   cursor: pointer;
-  padding: 12px, 16px;
   margin: 3px;
 }
 h2 {
   text-align: center;
 }
 .Title {
-  color: #2f93b5;
+  /* font-family: 'Monofett', cursive; */
+  font-size: 90px;
+  -webkit-text-fill-color: #084c61;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #323232;
 }
 
 .Home {
-  /* background: url(https://assets.atlasobscura.com/article_images/54798/image.jpg);
-	background-size: cover; */
-  background-color: #94c9a9;
+  background: url(https://cdn5.teebooks.com/3611-large_default/bookshelves-u-set-of-6.jpg);
+  background-size: cover;
+  -webkit-text-fill-color: #084c61;
+  -webkit-text-stroke-width: 0.25px;
+  -webkit-text-stroke-color: #323031;
+  font-weight: 500;
+  font-size: 25px;
+  border-radius: 25px;
+}
+.RegistrationLogin {
+  background-color: #177e89;
+  display: inline-block;
+  width: 50%;
+  color: #dfdce3;
+  border: 3px;
+  border-radius: 25px;
+  border-color: #084c61;
+}
+.BookList {
+  background-color: #323031;
+  padding: 25px;
+  display: inline-block;
+  color: #dfdce3;
+  border: 3px;
+  border-radius: 25px;
+  border-color: #084c61;
+}
+.btnSignIn {
+  background-color: #ffc857;
+  color: #323031;
+  border: 1px;
+  border-color: #084c61;
+}
+.saveBtn {
+  -webkit-text-fill-color: #dfdce3;
+}
+p {
+  font-size: 30px;
+  -webkit-text-fill-color: #084c61;
+  -webkit-text-stroke-width: 0.25px;
+  -webkit-text-stroke-color: #323031;
+}
+.updateFormBtn {
+  background-color: #084c61;
+  border-color: #084c61;
+  margin: 3px;
+}
+.updateForm {
+  padding: 20px;
+  margin: 10px;
+  border: 2px;
+  background-color: #b4b3b4;
+  border-style: solid;
+  border-color: #ffc857;
+  border-radius: 25px;
 }
 /* colors {
+	color: #fe5f55
+	color: #2f93b5
 	color: #1d3356
 } */

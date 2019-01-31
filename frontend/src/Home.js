@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar'
 import './Base.css'
-import { Container } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 
 class Home extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container className="Home container-fluid">
+      <Jumbotron className="Home container-fluid">
         <header>
           <NavBar isLoggedIn={this.props.isLoggedIn} />
           <div className="Cover">
@@ -39,7 +39,7 @@ class Home extends Component {
             <p>{this.state.quote}</p>
           </div>
         </header>
-      </Container>
+      </Jumbotron>
     )
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 
 class AddBook extends Component {
   constructor(props) {
@@ -51,30 +52,32 @@ class AddBook extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <h2>Add a book!</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Title:
-            <input
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group controlId="Title">
+            <Form.Label />
+            <Form.Control
               type="text"
               value={this.state.title}
               onChange={this.handleTitleChange}
+              placeholder="Title"
             />
-          </label>
-          <br />
-          <label>
-            Author:
-            <input
+          </Form.Group>
+          <Form.Group controlId="Author">
+            <Form.Label />
+            <Form.Control
               type="text"
               value={this.state.author}
               onChange={this.handleAuthorChange}
+              placeholder="Author"
             />
-          </label>
-          <br />
-          <input className="btn" type="submit" value="Submit" />
-        </form>
-      </div>
+          </Form.Group>
+          <Button className="btn" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Container>
     )
   }
 }

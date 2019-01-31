@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TrashButton from './TrashButton'
 import './Book.css'
 import { NavLink } from 'react-router-dom'
-import { Row, Container } from 'react-bootstrap'
+import { Row, Container, Button, Form, Col } from 'react-bootstrap'
 
 class Book extends Component {
   constructor(props) {
@@ -71,44 +71,63 @@ class Book extends Component {
   render() {
     if (this.state.updateClicked) {
       return (
-        <div>
-          <form onSubmit={this.onBookUpdate}>
-            <label>
-              <input
-                type="text"
-                value={this.state.newTitle}
-                onChange={this.handleTitleChange}
-              />
-            </label>
-            <label>
-              <input
-                type="text"
-                value={this.state.newAuthor}
-                onChange={this.handleAuthorChange}
-              />
-            </label>
-          </form>
-          <button onClick={this.handleSaveUpdate}>Save</button>
-          <button onClick={this.handleCancel}>Cancel</button>
-        </div>
+        <Container>
+          <div className="updateForm">
+            <Form onSubmit={this.onBookUpdate}>
+              <Row>
+                <Col>
+                  <Form.Group controlId="newTitle">
+                    <Form.Label />
+                    <Form.Control
+                      type="text"
+                      value={this.state.newTitle}
+                      onChange={this.handleTitleChange}
+                    />
+                  </Form.Group>
+                </Col>
+                <Col>
+                  <Form.Group>
+                    <Form.Label />
+                    <Form.Control
+                      type="text"
+                      value={this.state.newAuthor}
+                      onChange={this.handleAuthorChange}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            </Form>
+            <Row>
+              <Col sm={9} />
+              <Col sme={3}>
+                <Button className="updateFormBtn" onClick={this.handleCancel}>
+                  <i class="fas fa-arrow-left" />
+                </Button>
+                <Button
+                  className="updateFormBtn"
+                  onClick={this.handleSaveUpdate}
+                >
+                  <i class="fab fa-telegram-plane" />
+                </Button>
+              </Col>
+            </Row>
+          </div>
+        </Container>
       )
     } else {
       return (
         <Container>
           <Row>
-            <NavLink to={`user/${this.props.userId}/book/${this.props.bookId}`}>
-              {this.props.title} - {this.props.author}
-            </NavLink>
             <TrashButton
               bookId={this.props.bookId}
               onBookDelete={this.props.onBookDelete}
             />
-            <button
-              className="updateButton btn"
-              onClick={this.handleUpdateBook}
-            >
+            <Button className="updateButton" onClick={this.handleUpdateBook}>
               <i className="fas fa-pencil-alt" />
-            </button>
+            </Button>
+            <NavLink to={`user/${this.props.userId}/book/${this.props.bookId}`}>
+              {this.props.title} - {this.props.author}
+            </NavLink>
           </Row>
         </Container>
       )

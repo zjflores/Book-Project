@@ -81,7 +81,7 @@ class BookList extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Container className="BookList">
         <Row>
           <Col sm={8}>
             <h2>Your Shelf</h2>

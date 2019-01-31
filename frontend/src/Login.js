@@ -57,7 +57,8 @@ class Login extends Component {
       return <Redirect push to="/books" />
     } else {
       return (
-        <Container>
+        <Container className="RegistrationLogin">
+          <br />
           <h2>Login</h2>
           <Form onSubmit={this.handleSubmit}>
             <Row>
@@ -84,9 +85,11 @@ class Login extends Component {
                 </Form.Group>
               </Col>
             </Row>
-            <Button variant="primary" type="submit">
+            <br />
+            <Button className="btnSignIn" type="submit" size="lg" block>
               Sign In
             </Button>
+            <br />
           </Form>
         </Container>
       )
