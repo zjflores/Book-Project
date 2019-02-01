@@ -269,7 +269,9 @@ def update_book():
     print(data)
     print(session['user_id'])
 
+    # Check if other users are reading the title
     q = BookUser.query.filter(BookUser.book_id == data["id"])
+    # Check if the book already exists in the db
     q2 = Book.query.filter((Book.title == data["newTitle"]) & (
         Book.author == data["newAuthor"]))
 

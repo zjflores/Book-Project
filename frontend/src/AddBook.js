@@ -54,7 +54,7 @@ class AddBook extends Component {
     return (
       <Container>
         <h2>Add a book!</h2>
-        <Form onSubmit={this.handleSubmit}>
+        <Form className="titleForm" onSubmit={this.handleSubmit}>
           <Form.Group controlId="Title">
             <Form.Label />
             <Form.Control
@@ -64,7 +64,7 @@ class AddBook extends Component {
               placeholder="Title"
             />
           </Form.Group>
-          <Form.Group controlId="Author">
+          <Form.Group className="authorForm" controlId="Author">
             <Form.Label />
             <Form.Control
               type="text"
