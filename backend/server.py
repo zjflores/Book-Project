@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 from model import User, Book, BookUser, Genre, BookGenre, connect_to_db, db
 from data.keys.secret_keys import flask
-
+from random import choice
 app = Flask(__name__)
 cors = CORS(app, resources={
     r"/*": {r"supports_credentials": True, r"origins": r"http://localhost:3000"}})
@@ -25,8 +25,29 @@ def after(response):
 def index():
     """Homepage"""
 
+    quotes = [
+        "“If you go home with somebody, and they don't have books, don't fuck 'em!” - John Waters", 
+        '“Never trust anyone who has not brought a book with them.” – Lemony Snicket',
+        '"People say that life is the thing, but I prefer reading." — Logan Pearsall Smith',
+        '"Reading is a discount ticket to everywhere." — Mary Schmich',
+        '"A book is a dream you hold in your hands." — Neil Gaiman',
+        '“Reading one book is like eating one potato chip.” – Diane Duane',
+        '“Books are a uniquely portable magic.” – Stephen King',
+        '“People can lose their lives in libraries. They ought to be warned.” – Saul Bellow',
+        '“Once you have read a book you care about, some part of it is always with you.” – Louis L’Amour',
+        '“Literature is the most agreeable way of ignoring life.” – Fernando Pessoa',
+        '"Always read something that will make you look good if you die in the middle of it.” – P.J. O’Rourke',
+        '“You know you’ve read a good book when you turn the last page and feel a little as if you have lost a friend.” – Paul Sweeney',
+        '“Some books leave us free and some books make us free.” – Ralph Waldo Emerson',
+        '“Once you learn to read, you will be forever free.” – Frederick Douglas',
+        '“To learn to read is to light a fire; every syllable that is spelled out is a spark.” – Victor Hugo',
+        '“A book is a gift you can open again and again.” – Garrison Keillor',
+        '',
+        ]
+    quote = choice(quotes)
+    print(quote)
     react_dict = {}
-    react_dict["quote"] = '“Never trust anyone who has not brought a book with them.” – Lemony Snicket'
+    react_dict["quote"] = quote
     return jsonify(react_dict)
 
 

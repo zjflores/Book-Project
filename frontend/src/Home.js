@@ -31,7 +31,7 @@ class Home extends Component {
             />
             <div className="Cover">
               <h1 className="Title">Build Your Own Book Club</h1>
-              <p>{this.state.quote}</p>
+              <p className="quote">{this.state.quote}</p>
             </div>
           </div>
         </header>
