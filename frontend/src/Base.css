@@ -68,9 +68,12 @@ h2 {
 .Cover {
   padding-top: 80px;
 }
-.titleForm {
-  margin-bottom: 5px;
+/* .titleForm {
+  margin-bottom: 0px;
 }
+.authorForm {
+  margin-top: 0px;
+} */
 .RegistrationLogin {
   margin-top: 30px;
   margin-bottom: 30px;
