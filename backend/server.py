@@ -273,6 +273,12 @@ def update_book():
     q2 = Book.query.filter((Book.title == data["newTitle"]) & (
         Book.author == data["newAuthor"]))
 
+    # move q2 logic first
+    # only need one else
+
+    # if q2.count() == 1: 
+    #     if q.count() == 1
+
     if q.count() == 1:
         if q2.count() == 1:
             book = q2.one()

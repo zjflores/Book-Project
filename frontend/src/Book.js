@@ -101,7 +101,7 @@ class Book extends Component {
               <Col sm={9} />
               <Col sme={3}>
                 <Button className="updateFormBtn" onClick={this.handleCancel}>
-                  <i class="fas fa-arrow-left" />
+                  <i className="fas fa-arrow-left" />
                 </Button>
                 <Button
                   className="updateFormBtn"

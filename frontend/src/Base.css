@@ -1,5 +1,7 @@
 .btn {
   padding: 2px 10px;
+  background-color: #177e89;
+  border-color: #177e89;
 }
 body {
   /* background-image: url(https://lh3.googleusercontent.com/_tcY7QLx6X_8/UY1_bXEw_dI/AAAAAAAACGI/cED5J49RVlc/w500-h125-p/03-chevron-hand.jpg); */
@@ -68,11 +70,58 @@ h2 {
   border-radius: 25px;
   border-color: #084c61;
 }
+.bookInfo {
+  background-color: #177e89;
+  border-color: #db3a34;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  width: 75%;
+  display: inline-block;
+  color: #323031;
+}
+
+.userBooks {
+  background-color: #323031;
+  padding: 25px;
+  display: inline-block;
+  color: #dfdce3;
+  border: 3px;
+  border-style: solid;
+  border-radius: 25px;
+  border-color: #ffc857;
+  width: 50%;
+  padding-left: 50px;
+}
+.fa-book {
+  color: #db3a34;
+  margin-right: 5px;
+}
+.userShelf {
+  color: #177e89;
+}
+.userList {
+  background-color: #ffc857;
+  width: 50%;
+  border-radius: 25px;
+  color: #323031;
+  display: inline-block;
+}
+
+.userBtn {
+  color: #323031;
+}
 .btnSignIn {
   background-color: #ffc857;
-  color: #323031;
   border: 1px;
+  border-style: solid;
   border-color: #084c61;
+}
+.btnSignIn a {
+  color: #323031;
 }
 .saveBtn {
   -webkit-text-fill-color: #dfdce3;
@@ -96,6 +145,41 @@ p {
   border-style: solid;
   border-color: #ffc857;
   border-radius: 25px;
+}
+.FilteredMultiSelect {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding-right: 100px;
+}
+.multiSelectBtn {
+  /* margin-left: 25px;
+  padding-right: 15px; */
+  background-color: #ffc857;
+  color: #323031;
+}
+.btnDate {
+  background-color: #ffc857;
+  color: #323031;
+  margin-left: 5px;
+}
+.btnDate a {
+  color: #323031;
+}
+.BookForm {
+  width: 75%;
+  background-color: #177e89;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #323031;
+  border-radius: 25px;
+  display: inline-block;
+  padding: 15px;
+}
+.Forms {
+  display: inline-block;
 }
 /* colors {
 	color: #fe5f55

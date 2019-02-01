@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import User from './User'
+import { Container, Col } from 'react-bootstrap'
+import './Base.css'
 
 class UserList extends Component {
   constructor(props) {
@@ -32,14 +34,15 @@ class UserList extends Component {
 
   render() {
     return (
-      <div>
+      <Container className="userList">
         <h2>Users</h2>
-        <div>
+        <Col>
           {this.state.users.map(user => {
             return <User key={user.id} name={user.name} userId={user.id} />
           })}
-        </div>
-      </div>
+          <br />
+        </Col>
+      </Container>
     )
   }
 }

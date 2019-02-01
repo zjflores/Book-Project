@@ -73,7 +73,7 @@ class AddBook extends Component {
               placeholder="Author"
             />
           </Form.Group>
-          <Button className="btn" type="submit">
+          <Button className="btn" type="submit" block>
             Submit
           </Button>
         </Form>

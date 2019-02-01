@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FilteredMultiSelect from 'react-filtered-multiselect'
-import { Col, Row, Container, Form } from 'react-bootstrap'
+import { Col, Row, Container, Form, Button } from 'react-bootstrap'
+import './Base.css'
 
 class BookForms extends Component {
   constructor(props) {
@@ -162,65 +163,78 @@ class BookForms extends Component {
   render() {
     return (
       <Container>
-        <h2>Add info for {this.state.title}</h2>
-        <Row>
-          <Col sm={7}>
-            <Form onSubmit={this.handleSubmitGenres}>
-              <Row>
-                <label>
-                  Select Book Genre(s)
-                  <FilteredMultiSelect
-                    buttonText="Add"
-                    onChange={this.handleSelect}
-                    options={this.state.genres}
-                    selectedOptions={this.selectedGenres}
-                  />
-                </label>
-              </Row>
-              <Row>
-                <label>
-                  <FilteredMultiSelect
-                    buttonText="Remove"
-                    onChange={this.handleDeselect}
-                    options={this.state.selectedGenres}
-                    showFilter={false}
-                  />
-                </label>
-              </Row>
-              <input type="submit" value="Submit" />
-            </Form>
-          </Col>
-          <Col sm={5}>
+        <div className="BookForm">
+          <h2>Add info for {this.state.title}</h2>
+          <br />
+          <div className="forms">
             <Row>
-              <Form onSubmit={this.handleSubmitStartDate}>
-                <label>
-                  Start date:
-                  <input
-                    type="date"
-                    name="start"
-                    value={this.state.startDate}
-                    onChange={this.handleStartDateChange}
-                  />
-                </label>
-                <input className="btn" type="submit" value="Submit" />
+              <Form onSubmit={this.handleSubmitGenres}>
+                <Col>
+                  <Form.Label>Select Book Genre(s)</Form.Label>
+                  <Form.Group controlId="filteredMultiAdd">
+                    <FilteredMultiSelect
+                      buttonText="Add"
+                      showFilter={true}
+                      placeholder="type to filter"
+                      size="6"
+                      onChange={this.handleSelect}
+                      options={this.state.genres}
+                      selectedOptions={this.selectedGenres}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="filteredMultiRemove">
+                    <FilteredMultiSelect
+                      buttonText="Remove"
+                      onChange={this.handleDeselect}
+                      options={this.state.selectedGenres}
+                      showFilter={false}
+                      size="6"
+                    />
+                  </Form.Group>
+                </Col>
+                <Button className="multiSelectBtn" type="submit" size="lg">
+                  Submit
+                </Button>
+                <br />
               </Form>
+              <Col>
+                <Form onSubmit={this.handleSubmitStartDate}>
+                  <Row>
+                    <Form.Label>Start date:</Form.Label>
+                  </Row>
+                  <Row>
+                    <input
+                      type="date"
+                      name="start"
+                      value={this.state.startDate}
+                      onChange={this.handleStartDateChange}
+                    />
+                    <Button className="btnDate" type="submit">
+                      Submit
+                    </Button>
+                  </Row>
+                  <br />
+                </Form>
+                <Form onSubmit={this.handleSubmitEndDate}>
+                  <Row>
+                    <Form.Label>End date:</Form.Label>
+                  </Row>
+                  <Row>
+                    <input
+                      type="date"
+                      name="end"
+                      value={this.state.endDate}
+                      onChange={this.handleEndDateChange}
+                    />
+                    <Button className="btnDate" type="submit">
+                      Submit
+                    </Button>
+                  </Row>
+                </Form>
+              </Col>
             </Row>
-            <Row>
-              <Form onSubmit={this.handleSubmitEndDate}>
-                <label>
-                  End date:
-                  <input
-                    type="date"
-                    name="end"
-                    value={this.state.endDate}
-                    onChange={this.handleEndDateChange}
-                  />
-                </label>
-                <input className="btn" type="submit" value="Submit" />
-              </Form>
-            </Row>
-          </Col>
-        </Row>
+          </div>
+        </div>
       </Container>
     )
   }

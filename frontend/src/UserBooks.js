@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class UserBooks extends Component {
   constructor(props) {
@@ -66,23 +67,26 @@ class UserBooks extends Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.state.name}'s Shelf</h2>
-        <div>
-          {this.state.books.map(book => {
-            return (
-              <div key={book.id}>
-                <NavLink
-                  to={`/user/${this.props.match.params.id}/book/${book.id}`}
-                >
-                  {book.title} - {book.author}
-                </NavLink>
-              </div>
-            )
-          })}
-          <br />
+      <Container>
+        <div className="userBooks">
+          <h2 className="userShelf">{this.state.name}'s Shelf</h2>
+          <div>
+            {this.state.books.map(book => {
+              return (
+                <Row key={book.id}>
+                  <i className="fas fa-book" />
+                  <NavLink
+                    to={`/user/${this.props.match.params.id}/book/${book.id}`}
+                  >
+                    {book.title} - {book.author}
+                  </NavLink>
+                </Row>
+              )
+            })}
+            <br />
+          </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }
