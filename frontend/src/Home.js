@@ -25,7 +25,10 @@ class Home extends Component {
         <Jumbotron className="Home container-fluid" />
         <header>
           <div className="header">
-            <NavBar isLoggedIn={this.props.isLoggedIn} />
+            <NavBar
+              isLoggedIn={this.props.isLoggedIn}
+              onLogout={this.onLogout}
+            />
             <div className="Cover">
               <h1 className="Title">Build Your Own Book Club</h1>
               <p>{this.state.quote}</p>

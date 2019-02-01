@@ -11,8 +11,8 @@ class BookInfo extends Component {
       title: '',
       name: '',
       genres: [],
-      startDate: '',
-      endDate: '',
+      startDate: 'No date given',
+      endDate: 'No date given',
       authorized: false,
       readers: [],
     }
@@ -129,8 +129,10 @@ class BookInfo extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        data = moment(data).format('MMMM Do gggg')
-        this.setState({ startDate: data })
+        if (data != null) {
+          data = moment(data).format('MMMM Do gggg')
+          this.setState({ startDate: data })
+        }
       })
       .catch(error => console.error(error))
   }
@@ -151,8 +153,10 @@ class BookInfo extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        data = moment(data).format('MMMM Do gggg')
-        this.setState({ endDate: data })
+        if (data != null) {
+          data = moment(data).format('MMMM Do gggg')
+          this.setState({ startDate: data })
+        }
       })
       .catch(error => console.error(error))
   }
@@ -174,7 +178,11 @@ class BookInfo extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        this.setState({ readers: data })
+        if (data != null) {
+          this.setState({ readers: data })
+        } else {
+          this.setState({ readers: ['No other readers'] })
+        }
       })
   }
 

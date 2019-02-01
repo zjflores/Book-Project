@@ -77,9 +77,6 @@ def login():
 def logout():
     """Remove user from session"""
 
-    data = request.get_json()
-    print(data)
-
     session.clear()
     return jsonify("User has been logged out")
 

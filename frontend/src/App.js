@@ -22,7 +22,7 @@ class App extends React.Component {
     this.onLogin = this.onLogin.bind(this)
     this.onLogout = this.onLogout.bind(this)
     this.renderLogin = this.renderLogin.bind(this)
-    this.renderLogout = this.renderLogout.bind(this)
+    // this.renderLogout = this.renderLogout.bind(this)
     this.renderRegister = this.renderRegister.bind(this)
     this.renderHome = this.renderHome.bind(this)
   }
@@ -35,18 +35,18 @@ class App extends React.Component {
   renderLogin() {
     return <Login onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
   }
-  renderLogout() {
-    return (
-      <Logout onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
-    )
-  }
+  // renderLogout() {
+  //   return (
+  //     <Logout onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
+  //   )
+  // }
   renderRegister() {
     return (
       <Register onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
     )
   }
   renderHome() {
-    return <Home isLoggedIn={this.state.isLoggedIn} />
+    return <Home isLoggedIn={this.state.isLoggedIn} onLogout={this.onLogout} />
   }
   render() {
     return (
@@ -57,7 +57,7 @@ class App extends React.Component {
             <Route path="/register" component={this.renderRegister} />
             <Route path="/login" component={this.renderLogin} />
             <Route path="/books" component={BookList} />
-            <Route path="/logout" component={this.renderLogout} />
+            {/* <Route path="/logout" component={this.renderLogout} /> */}
             <Route exact path="/user/:id/book/:bookId" component={BookInfo} />
             <Route path="/user/:id/book/:bookId/update" component={BookForms} />
             <Route path="/users" component={UserList} />

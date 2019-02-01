@@ -53,6 +53,10 @@ h2 {
   bottom: 0px;
 }
 
+.logoutPosition {
+  display: inline-flex;
+  align-content: flex-end;
+}
 .Home {
   background: url(https://cdn5.teebooks.com/3611-large_default/bookshelves-u-set-of-6.jpg);
   background-size: cover;
@@ -66,14 +70,18 @@ h2 {
   opacity: 0.5;
 }
 .Cover {
-  padding-top: 80px;
+  padding-top: 70px;
 }
-/* .titleForm {
-  margin-bottom: 0px;
+.logoutBtn {
+  background-color: #ffc857;
+  border-style: solid;
+  border-color: #177e89;
+  border-width: 3px;
+  color: #323031;
 }
-.authorForm {
-  margin-top: 0px;
-} */
+.logoutBtn a {
+  color: #323031;
+}
 .RegistrationLogin {
   margin-top: 30px;
   margin-bottom: 30px;
