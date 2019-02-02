@@ -35,7 +35,6 @@ class NavBar extends Component {
       .then(data => {
         console.log(data)
         this.props.onLogout()
-        return <Redirect push to="/" />
       })
       .catch(error => console.error(error))
   }
@@ -77,25 +76,28 @@ class NavBar extends Component {
       )
     } else {
       return (
-        <Navbar>
-          <Nav className="mynav">
-            <NavItem>
-              <LinkContainer to="/">
-                <span className="navlink">Home</span>
-              </LinkContainer>
-            </NavItem>
-            <NavItem>
-              <LinkContainer to="/register">
-                <span className="navlink">Register</span>
-              </LinkContainer>
-            </NavItem>
-            <NavItem>
-              <LinkContainer to="/login">
-                <span className="navlink">Login</span>
-              </LinkContainer>
-            </NavItem>
-          </Nav>
-        </Navbar>
+        <Container>
+          <Redirect push to="/" />
+          <Navbar>
+            <Nav className="mynav">
+              <NavItem>
+                <LinkContainer to="/">
+                  <span className="navlink">Home</span>
+                </LinkContainer>
+              </NavItem>
+              <NavItem>
+                <LinkContainer to="/register">
+                  <span className="navlink">Register</span>
+                </LinkContainer>
+              </NavItem>
+              <NavItem>
+                <LinkContainer to="/login">
+                  <span className="navlink">Login</span>
+                </LinkContainer>
+              </NavItem>
+            </Nav>
+          </Navbar>
+        </Container>
       )
     }
   }
