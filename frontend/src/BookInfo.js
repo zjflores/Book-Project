@@ -196,110 +196,66 @@ class BookInfo extends Component {
     this.getReaders()
   }
   render() {
-    if (this.state.authorized) {
-      return (
-        <Container>
-          <div className="bookInfo">
-            <br />
-            <h2>{this.state.title}</h2>
-            <br />
-            <Row>
-              <Col lg={6}>
-                <h3>You started this book on: </h3>
-                {this.state.startDate}
-              </Col>
-              <Col lg={6}>
-                <h3>You finished this book on:</h3>
-                {this.state.endDate}
-              </Col>
-            </Row>
-            <br />
-            <Row>
-              <Col lg={5}>
-                <h3>Genres</h3>
-                {this.state.genres.map(genre => {
-                  return <div key={genre.genre}>{genre.genre}</div>
-                })}
-              </Col>
-              <Col lg={7}>
-                <h3>Other User's Reading This Title</h3>
-                {this.state.readers.map(reader => {
-                  return (
-                    <div key={reader.id}>
-                      <NavLink
-                        to={`user/${reader.id}/book/${this.props.bookId}`}
-                      >
-                        {reader.name}
-                      </NavLink>
-                    </div>
-                  )
-                })}
-              </Col>
-            </Row>
-            <br />
-            <h3> Want to add more info?</h3>
-            <Button className="btnSignIn" sz="lg">
-              <NavLink
-                to={`/user/${this.props.match.params.id}/book/${
-                  this.props.match.params.bookId
-                }/update`}
-              >
-                Click here
-              </NavLink>
-            </Button>
-            <br />
-            <br />
-          </div>
-        </Container>
-      )
-    } else {
-      return (
-        <Container>
-          <div className="bookInfo">
-            <br />
-            <h2>{this.state.title}</h2>
-            <br />
-            <Row>
-              <Col sz={4}>
-                <h3>You started this book on: </h3>
-                {this.state.startDate}
-              </Col>
-              <Col sz={8}>
-                <h3>You finished this book on:</h3>
-                {this.state.endDate}
-              </Col>
-            </Row>
-            <br />
-            <Row>
-              <Col sz={4}>
-                <h3>Genres</h3>
-                {this.state.genres.map(genre => {
-                  return <div key={genre.genre}>{genre.genre}</div>
-                })}
-              </Col>
-              <Col lg={8}>
-                <h3>Other User's Reading This Title</h3>
-                {this.state.readers.map(reader => {
-                  return (
-                    <div key={reader.id}>
-                      <NavLink
-                        to={`/user/${reader.id}/book/${
-                          this.props.match.params.bookId
-                        }`}
-                      >
-                        {reader.name}
-                      </NavLink>
-                    </div>
-                  )
-                })}
-              </Col>
-            </Row>
-            <br />
-            <br />
-          </div>
-        </Container>
-      )
-    }
+    return (
+      <Container>
+        <div className="bookInfo">
+          <br />
+          <h2>{this.state.title}</h2>
+          <br />
+          <Row>
+            <Col lg={6}>
+              <h3>You started this book on: </h3>
+              {this.state.startDate}
+            </Col>
+            <Col lg={6}>
+              <h3>You finished this book on:</h3>
+              {this.state.endDate}
+            </Col>
+          </Row>
+          <br />
+          <Row>
+            <Col lg={5}>
+              <h3>Genres</h3>
+              {this.state.genres.map(genre => {
+                return <div key={genre.genre}>{genre.genre}</div>
+              })}
+            </Col>
+            <Col lg={7}>
+              <h3>Other User's Reading This Title</h3>
+              {this.state.readers.map(reader => {
+                return (
+                  <div key={reader.id}>
+                    <NavLink
+                      to={`/user/${reader.id}/book/${this.props.params.bookId}`}
+                    >
+                      {reader.name}
+                    </NavLink>
+                  </div>
+                )
+              })}
+            </Col>
+          </Row>
+          <br />
+          {this.state.authorized && (
+            <div>
+              <h3> Want to add more info?</h3>
+              <Button className="btnSignIn" sz="lg">
+                <NavLink
+                  to={`/user/${this.props.match.params.id}/book/${
+                    this.props.match.params.bookId
+                  }/update`}
+                >
+                  Click here
+                </NavLink>
+              </Button>
+              <br />
+            </div>
+          )}
+          <br />
+        </div>
+      </Container>
+    )
   }
 }
+
 export default BookInfo
