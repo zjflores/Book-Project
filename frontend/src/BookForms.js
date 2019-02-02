@@ -161,6 +161,15 @@ class BookForms extends Component {
   }
 
   render() {
+    let availableGenres = this.state.genres.filter(genre => {
+      for (let i = 0; i < this.state.selectedGenres.length; i++) {
+        if (this.state.selectedGenres[i].text === genre.text) {
+          return false
+        }
+      }
+      return true
+    })
+
     return (
       <Container>
         <div className="BookForm">
@@ -178,7 +187,7 @@ class BookForms extends Component {
                       placeholder="type to filter"
                       size="6"
                       onChange={this.handleSelect}
-                      options={this.state.genres}
+                      options={availableGenres}
                       selectedOptions={this.selectedGenres}
                     />
                   </Form.Group>

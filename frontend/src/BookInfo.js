@@ -283,7 +283,9 @@ class BookInfo extends Component {
                   return (
                     <div key={reader.id}>
                       <NavLink
-                        to={`user/${reader.id}/book/${this.props.bookId}`}
+                        to={`/user/${reader.id}/book/${
+                          this.props.match.params.bookId
+                        }`}
                       >
                         {reader.name}
                       </NavLink>
