@@ -204,36 +204,43 @@ class BookInfo extends Component {
           <br />
           <h2>{this.state.title}</h2>
           <br />
-          <Row>
+          <Row className="bookCols">
             <Col lg={6}>
-              <h3>You started this book on: </h3>
-              {this.state.startDate}
+              <Row>
+                <h3>You started this book on: </h3>
+              </Row>
+              <Row>{this.state.startDate}</Row>
+              <Row>
+                <h3>You finished this book on:</h3>
+              </Row>
+              <Row>{this.state.endDate}</Row>
             </Col>
             <Col lg={6}>
-              <h3>You finished this book on:</h3>
-              {this.state.endDate}
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Col lg={5}>
-              <h3>Genres</h3>
+              <Row>
+                <h3>Genres</h3>
+              </Row>
               {(this.state.genres || []).map(genre => {
-                return <div key={genre.genre}>{genre.genre}</div>
+                return (
+                  <Row>
+                    <div key={genre.genre}>{genre.genre}</div>
+                  </Row>
+                )
               })}
-            </Col>
-            <Col lg={7}>
-              <h3>Other User's Reading This Title</h3>
+              <Row>
+                <h3>Other Readers</h3>
+              </Row>
               {this.state.readers.map(reader => {
                 return (
                   <div key={reader.id}>
-                    <NavLink
-                      to={`/user/${reader.id}/book/${
-                        this.props.match.params.bookId
-                      }`}
-                    >
-                      {reader.name}
-                    </NavLink>
+                    <Row>
+                      <NavLink
+                        to={`/user/${reader.id}/book/${
+                          this.props.match.params.bookId
+                        }`}
+                      >
+                        {reader.name}
+                      </NavLink>
+                    </Row>
                   </div>
                 )
               })}

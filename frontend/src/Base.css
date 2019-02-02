@@ -109,11 +109,14 @@ a {
   border-radius: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-right: 30px;
   width: 75%;
   display: inline-block;
   color: #323031;
 }
+.bookCols {
+  padding-left: 120px;
+}
+
 .trashButton {
   background-color: #db3a34;
   -webkit-text-fill-color: #323031;
