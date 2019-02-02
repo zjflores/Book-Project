@@ -17,6 +17,7 @@ class NavBar extends Component {
     this.state = {
       isLoggedIn: this.props.isLoggedIn,
     }
+    this.handleLogout = this.handleLogout.bind(this)
   }
   handleLogout(event) {
     event.preventDefault()

@@ -8,7 +8,6 @@ import BookList from './BookList'
 import BookInfo from './BookInfo'
 import Login from './Login'
 import Register from './Register'
-import Logout from './Logout'
 import UserList from './UserList'
 import UserBooks from './UserBooks'
 import BookForms from './BookForms'
@@ -22,7 +21,6 @@ class App extends React.Component {
     this.onLogin = this.onLogin.bind(this)
     this.onLogout = this.onLogout.bind(this)
     this.renderLogin = this.renderLogin.bind(this)
-    // this.renderLogout = this.renderLogout.bind(this)
     this.renderRegister = this.renderRegister.bind(this)
     this.renderHome = this.renderHome.bind(this)
   }
@@ -35,18 +33,14 @@ class App extends React.Component {
   renderLogin() {
     return <Login onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
   }
-  // renderLogout() {
-  //   return (
-  //     <Logout onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
-  //   )
-  // }
+
   renderRegister() {
     return (
       <Register onLogin={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
     )
   }
   renderHome() {
-    return <Home isLoggedIn={this.state.isLoggedIn} onLogout={this.onLogout} />
+    return <Home onLogout={this.onLogout} isLoggedIn={this.state.isLoggedIn} />
   }
   render() {
     return (
