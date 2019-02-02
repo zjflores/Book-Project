@@ -8,6 +8,7 @@ import {
   NavItem,
   Button,
 } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import './NavBar.css'
 
@@ -34,6 +35,7 @@ class NavBar extends Component {
       .then(data => {
         console.log(data)
         this.props.onLogout()
+        return <Redirect push to="/" />
       })
       .catch(error => console.error(error))
   }
