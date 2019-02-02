@@ -52,7 +52,7 @@ def index():
         '“Never put off till tomorrow the book you can read today.” – Holbrook Jackson',
         '“What kind of life can you have in a house without books?” – Sherman Alexie'
         ]
-        
+
     quote = choice(quotes)
     return jsonify({'quote': quote})
 
@@ -157,15 +157,14 @@ def get_bookgenres():
     genres = []
     q = BookGenre.query.filter(BookGenre.book_id == data['id'])
 
-    if q.count() > 0:
-        for i in q.all():
-            genre = Genre.query.get(i.genre_id)
-            genres.append({'genre': genre.genre})
-        print(genres)
-        return jsonify(genres)
 
-    else:
-        return jsonify("No genres assigned")
+    for i in q.all():
+        genre = Genre.query.get(i.genre_id)
+        genres.append({'genre': genre.genre})
+    print(genres)
+    return jsonify(genres)
+
+  
 
 
 @app.route('/set-genres', methods=['POST'])

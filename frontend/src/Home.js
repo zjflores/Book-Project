@@ -27,7 +27,7 @@ class Home extends Component {
           <div className="header">
             <NavBar
               isLoggedIn={this.props.isLoggedIn}
-              onLogout={this.onLogout}
+              onLogout={this.props.onLogout}
             />
             <div className="Cover">
               <h1 className="Title">Build Your Own Book Club</h1>

@@ -196,6 +196,8 @@ class BookInfo extends Component {
     this.getReaders()
   }
   render() {
+    console.log('######### lol', this.state)
+
     return (
       <Container>
         <div className="bookInfo">
@@ -216,7 +218,7 @@ class BookInfo extends Component {
           <Row>
             <Col lg={5}>
               <h3>Genres</h3>
-              {this.state.genres.map(genre => {
+              {(this.state.genres || []).map(genre => {
                 return <div key={genre.genre}>{genre.genre}</div>
               })}
             </Col>
@@ -241,15 +243,15 @@ class BookInfo extends Component {
           {this.state.authorized && (
             <div>
               <h3> Want to add more info?</h3>
-              <Button className="btnSignIn" sz="lg">
-                <NavLink
-                  to={`/user/${this.props.match.params.id}/book/${
-                    this.props.match.params.bookId
-                  }/update`}
-                >
+              <NavLink
+                to={`/user/${this.props.match.params.id}/book/${
+                  this.props.match.params.bookId
+                }/update`}
+              >
+                <Button className="btnSignIn" sz="lg">
                   Click here
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
               <br />
             </div>
           )}

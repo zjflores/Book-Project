@@ -11,11 +11,9 @@ class User extends Component {
   }
   render() {
     return (
-      <Button className="userBtn" block>
-        <NavLink to={`/user/${this.props.userId}/books`}>
-          {this.props.name}
-        </NavLink>
-      </Button>
+      <NavLink className="userBtn" to={`/user/${this.props.userId}/books`}>
+        <Button block>{this.props.name}</Button>
+      </NavLink>
     )
   }
 }
