@@ -77,6 +77,26 @@ def load_user_books():
     db.session.commit()
 
 
+def load_bookgenre():
+    """load bookgenres into db"""
+
+    print("BookGenre")
+
+    # Delete row to avoid duplicates
+    BookGenre.query.delete()
+
+    bookgenre_rows = csv.DictReader(open('data/bookgenre.csv'))
+
+    for bookgenre in bookgenre_rows:
+        book = Book.query.filter(Book.title == bookgenre["book"]).first()
+        genre = Genre.query.filter(Genre.genre == bookgenre["genre"]).first()
+
+        new_bookgenre = BookGenre(book_id=book.id,
+                                  genre_id=genre.id)
+        db.session.add(new_bookgenre)
+    db.session.commit()
+
+
 # def load_meetings():
 #     """Load meetings into db"""
 
@@ -106,8 +126,7 @@ def load_user_books():
 
 #     for usermeeting in usermeeting_rows:
 #         user = User.query.filter(User.name == usermeeting["name"]).one()
-#         meeting = Meeting.query.filter((Meeting.month == usermeeting["month"]) & (
-#             Meeting.year == usermeeting["year"])).one()
+#         meeting = Meeting.query.filter((Meeting.month == usermeeting["month"]) & (Meeting.year == usermeeting["year"])).one()
 
 #         new_usermeeting = UserMeeting(user_id=user.id,
 #                                       meeting_id=meeting.id)
@@ -115,31 +134,12 @@ def load_user_books():
 #     db.session.commit()
 
 
-def load_bookgenre():
-    """load bookgenres into db"""
-
-    print("BookGenre")
-
-    # Delete row to avoid duplicates
-    BookGenre.query.delete()
-
-    bookgenre_rows = csv.DictReader(open('data/bookgenre.csv'))
-
-    for bookgenre in bookgenre_rows:
-        book = Book.query.filter(Book.title == bookgenre["book"]).first()
-        genre = Genre.query.filter(Genre.genre == bookgenre["genre"]).first()
-
-        new_bookgenre = BookGenre(book_id=book.id,
-                                  genre_id=genre.id)
-        db.session.add(new_bookgenre)
-    db.session.commit()
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     print(db)
 
     # In case tables haven't been created, create them
+
     db.create_all()
 
     # Import different types of data
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     load_users()
     load_books()
     load_genres()
-    # load_meetings()
     load_user_books()
-    # load_user_meetings()
     load_bookgenre()
+    # load_meetings()
+    # load_user_meetings()
