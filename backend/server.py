@@ -42,13 +42,19 @@ def index():
         '“Once you learn to read, you will be forever free.” – Frederick Douglas',
         '“To learn to read is to light a fire; every syllable that is spelled out is a spark.” – Victor Hugo',
         '“A book is a gift you can open again and again.” – Garrison Keillor',
-        '',
+        '“I have always imagined that paradise will be a kind of library.” – Jorge Luis Borges',
+        '“Reading is a discount ticket to everywhere.” – Mary Schmich',
+        '“If you are going to get anywhere in life you have to read a lot of books.” – Roald Dahl',
+        '“I guess there are never enough books.” – John Steinbeck',
+        '“Libraries will get you through times of no money better than money will get you through times of no libraries.” – Anne Herbert',
+        '“I intend to put up with nothing that I can put down.” – Edgar Allan Poe',
+        '“Reading for me, is spending time with a friend.” – Gary Paulsen',
+        '“Never put off till tomorrow the book you can read today.” – Holbrook Jackson',
+        '“What kind of life can you have in a house without books?” – Sherman Alexie'
         ]
+        
     quote = choice(quotes)
-    print(quote)
-    react_dict = {}
-    react_dict["quote"] = quote
-    return jsonify(react_dict)
+    return jsonify({'quote': quote})
 
 
 @app.route('/register', methods=['POST'])
