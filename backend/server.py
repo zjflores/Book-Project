@@ -186,16 +186,8 @@ def add_book():
 
     q = Book.query.filter((Book.title == data["title"]) & (
         Book.author == data["author"]))
-    if q.count() > 0:
-        book = q.one()
-        new_user_book = BookUser(book_id=book.id, user_id=session['user_id'])
-        db.session.add(new_user_book)
-        db.session.commit()
-        book = {'title': data["title"],
-                'author': data["author"], 'id': book.id}
-        return jsonify(book)
 
-    else:
+    if q.count() == 0:
         new_book = Book(title=data['title'], author=data['author'])
         db.session.add(new_book)
         db.session.commit()
@@ -206,7 +198,15 @@ def add_book():
         book = {'title': data["title"],
                 'author': data["author"], 'id': new_book.id}
         return jsonify(book)
-
+    
+    else:
+        book = q.one()
+        new_user_book = BookUser(book_id=book.id, user_id=session['user_id'])
+        db.session.add(new_user_book)
+        db.session.commit()
+        book = {'title': book.title,
+                'author': book.author, 'id': book.id}
+        return jsonify(book)
 
 @app.route('/delete-book', methods=["POST"])
 def delete_book():
@@ -214,13 +214,13 @@ def delete_book():
 
     data = request.get_json()
     print(data)
-    print(session)
 
     user_book = BookUser.query.filter(BookUser.book_id == data["id"]).one()
     db.session.delete(user_book)
     print(user_book)
     db.session.commit()
     return jsonify("Book successfully deleted")
+
 
 
 @app.route('/update-book', methods=["POST"])

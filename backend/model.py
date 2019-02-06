@@ -13,7 +13,8 @@ class Book(db.Model):
                    primary_key=True)
     title = db.Column(db.String(250),
                       nullable=False)
-    author = db.Column(db.String(50))
+    author = db.Column(db.String(50),
+                       nullable=False)
     UniqueConstraint(title, author)
 
     def __repr__(self):
@@ -28,7 +29,8 @@ class Genre(db.Model):
                    autoincrement=True,
                    primary_key=True)
     genre = db.Column(db.String(25),
-                      unique=True)
+                      unique=True,
+                      nullable=False)
 
     def __repr__(self):
         return "<Genre id={} genre={}>".format(self.id, self.genre)
@@ -47,6 +49,7 @@ class BookGenre(db.Model):
     genre_id = db.Column(db.Integer,
                          db.ForeignKey('genres.id'),
                          nullable=False)
+    UniqueConstraint(book_id, genre_id)
 
     def __repr__(self):
         return "<BookGenre id={} Book id={} Genre id={}>".format(
@@ -60,10 +63,15 @@ class User(db.Model):
     id = db.Column(db.Integer,
                    autoincrement=True,
                    primary_key=True)
-    fname = db.Column(db.String(25))
-    lname = db.Column(db.String(25))
-    email = db.Column(db.String(50))
-    password = db.Column(db.String(25))
+    fname = db.Column(db.String(25),
+                      nullable=False)
+    lname = db.Column(db.String(25),
+                      nullable=False)
+    email = db.Column(db.String(50),
+                      unique=True,
+                      nullable=False)
+    password = db.Column(db.String(25),
+                         nullable=False)
 
     def __repr__(self):
         return "<User id={} fname={} lname{} email={} password{}>".format(

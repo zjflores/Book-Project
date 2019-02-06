@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'
+import { Container, Form, Button } from 'react-bootstrap'
 
 class AddBook extends Component {
   constructor(props) {
@@ -46,6 +46,8 @@ class AddBook extends Component {
           this.state.author,
           this.state.bookId
         )
+        this.setState({ author: '' })
+        this.setState({ title: '' })
       })
       .catch(error => console.error(error))
   }
