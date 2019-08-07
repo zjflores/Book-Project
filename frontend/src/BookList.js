@@ -40,7 +40,7 @@ class BookList extends React.Component {
   }
 
   getUserId() {
-    fetch('http://localhost:5000/get-userid', {
+    fetch('http://:5000/get-userid', {
       method: 'GET',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -58,7 +58,7 @@ class BookList extends React.Component {
   }
 
   getBooks() {
-    fetch('http://localhost:5000/get-your-books', {
+    fetch('http://:5000/get-your-books', {
       method: 'GET',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

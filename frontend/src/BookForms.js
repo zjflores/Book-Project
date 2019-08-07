@@ -53,7 +53,7 @@ class BookForms extends Component {
 
   handleSubmitStartDate(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/book/set-start-date', {
+    fetch('http://:5000/book/set-start-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       headers: {
@@ -74,7 +74,7 @@ class BookForms extends Component {
 
   handleSubmitEndDate(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/book/set-end-date', {
+    fetch('http://:5000/book/set-end-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -96,7 +96,7 @@ class BookForms extends Component {
 
   handleSubmitGenres(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/set-genres', {
+    fetch('http://:5000/set-genres', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -117,7 +117,7 @@ class BookForms extends Component {
   }
 
   getGenres() {
-    fetch('http://localhost:5000/get-genres', {
+    fetch('http://:5000/get-genres', {
       method: 'GET',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -135,7 +135,7 @@ class BookForms extends Component {
   }
 
   getTitle() {
-    fetch('http://localhost:5000/get-title', {
+    fetch('http://:5000/get-title', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

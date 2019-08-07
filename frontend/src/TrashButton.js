@@ -10,7 +10,7 @@ class TrashButton extends Component {
 
   handleDeleteBook(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/delete-book', {
+    fetch('http://:5000/delete-book', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       headers: {

@@ -10,7 +10,7 @@ class Home extends Component {
   }
 
   getQuote = () => {
-    fetch('http://localhost:5000')
+    fetch('http://:5000')
       .then(response => response.json())
       .then(data => this.setState({ quote: data.quote }))
   }

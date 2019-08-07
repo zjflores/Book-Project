@@ -41,7 +41,7 @@ class Book extends Component {
 
   handleSaveUpdate(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/update-book', {
+    fetch('http://:5000/update-book', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

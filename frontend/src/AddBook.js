@@ -24,7 +24,7 @@ class AddBook extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/add-book', {
+    fetch('http://:5000/add-book', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

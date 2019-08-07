@@ -25,7 +25,7 @@ class BookInfo extends Component {
     this.getReaders = this.getReaders.bind(this)
   }
   getTitle() {
-    fetch('http://localhost:5000/get-title', {
+    fetch('http://:5000/get-title', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -46,7 +46,7 @@ class BookInfo extends Component {
   }
 
   getAuthorization() {
-    fetch('http://localhost:5000/get-authorization', {
+    fetch('http://:5000/get-authorization', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -72,7 +72,7 @@ class BookInfo extends Component {
   }
 
   getName() {
-    fetch('http://localhost:5000/get-name', {
+    fetch('http://:5000/get-name', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -93,7 +93,7 @@ class BookInfo extends Component {
   }
 
   getBookGenres() {
-    fetch('http://localhost:5000/get-bookgenres', {
+    fetch('http://:5000/get-bookgenres', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -113,7 +113,7 @@ class BookInfo extends Component {
       .catch(error => console.error(error))
   }
   getStartDate() {
-    fetch('http://localhost:5000/get-start-date', {
+    fetch('http://:5000/get-start-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -137,7 +137,7 @@ class BookInfo extends Component {
       .catch(error => console.error(error))
   }
   getEndDate() {
-    fetch('http://localhost:5000/get-end-date', {
+    fetch('http://:5000/get-end-date', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -162,7 +162,7 @@ class BookInfo extends Component {
   }
 
   getReaders() {
-    fetch('http://localhost:5000/get-readers', {
+    fetch('http://:5000/get-readers', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

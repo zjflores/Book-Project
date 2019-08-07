@@ -21,7 +21,7 @@ class UserBooks extends Component {
   }
 
   getName() {
-    fetch('http://localhost:5000/get-name', {
+    fetch('http://:5000/get-name', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',
@@ -41,7 +41,7 @@ class UserBooks extends Component {
       .catch(error => console.error(error))
   }
   getBooks() {
-    fetch('http://localhost:5000/get-user-books', {
+    fetch('http://:5000/get-user-books', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

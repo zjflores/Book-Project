@@ -22,7 +22,7 @@ class NavBar extends Component {
   }
   handleLogout(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/logout', {
+    fetch('http://:5000/logout', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

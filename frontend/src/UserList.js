@@ -12,7 +12,7 @@ class UserList extends Component {
     this.getUsers = this.getUsers.bind(this)
   }
   getUsers() {
-    fetch('http://localhost:5000/get-users', {
+    fetch('http://:5000/get-users', {
       method: 'GET',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

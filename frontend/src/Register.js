@@ -37,7 +37,7 @@ class Register extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/register', {
+    fetch('http://:5000/register', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

@@ -25,7 +25,7 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    fetch('http://localhost:5000/login', {
+    fetch('http://:5000/login', {
       method: 'POST',
       mode: 'cors', // no-cors, cors, *same-origin
       credentials: 'include',

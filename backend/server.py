@@ -14,7 +14,7 @@ from random import choice
 
 app = Flask(__name__)
 cors = CORS(app, resources={
-    r"/*": {r"supports_credentials": True, r"origins": r"http://localhost:3000"}})
+    r"/*": {r"supports_credentials": True, r"origins": r"http://:3000"}})
 
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = flask.secret
