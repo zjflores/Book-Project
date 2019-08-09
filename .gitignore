@@ -18,7 +18,7 @@ __pycache__
 /coverage
 
 # production
-/build
+/templates/build
 
 # misc
 .DS_Store
@@ -34,7 +34,7 @@ yarn-error.log*
 .idea/
 .vscode/
 node_modules/
-build
+templates/build
 .DS_Store
 *.tgz
 my-app*
@@ -47,3 +47,4 @@ yarn-error.log*
 .npm/
 MultiSelect.js
 *prettierrc.json
+
