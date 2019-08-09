@@ -163,10 +163,10 @@ def connect_to_db(app):
     # Configure to use our PstgreSQL database
     database_url = os.environ.get("DATABASE_URL")
     if database_url:
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://zjflores@localhost:5432/book_project'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
 

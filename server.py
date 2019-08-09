@@ -23,6 +23,10 @@ cors = CORS(app, resources={
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = os.environ.get("SECRET_KEY") or b'_5#y2L"F4Q8z\n\xec]/'
 
+@app.before_request
+def before():
+    if os.environ.get("DATABASE_URL"):
+        connect_to_db(app)
 
 @app.after_request
 def after(response):
@@ -71,9 +75,9 @@ def get_userid():
 ############################## HOME ROUTES #################################### 
 ################################################################################
 
-@app.route('/realhome', methods=['GET'])
-def realhome():
-  return 'Hello Wurld'
+@app.route('/test', methods=['GET'])
+def test():
+  return 
 
 @app.route('/quotes')
 def index():
@@ -308,12 +312,10 @@ def update_book():
 @cross_origin()
 def get_genres():
     "Query db for all genres"
-
     genres = []
     q = Genre.query.all()
     for i in q:
         genres.append({'text': i.genre, 'value': i.id})
-
     return jsonify(genres)
 
 
